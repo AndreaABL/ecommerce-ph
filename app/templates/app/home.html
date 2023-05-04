@@ -1,0 +1,71 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Inicio{% endblock title %}
+
+{% block banner-slider %}
+<div class="hero" style="background-image: url('{% static 'app/images/banner/SLIDER3.JPG'%}');">
+    <h4 style="font-size:25px font-family:Chakra Petch" >¡Hola!</h4>
+    <h2 style="font-family:Signika Negative; font-size:46px; line-height:54px;">Puedes revisar nuestros productos</h2>
+    <p style="font-size:20px; font-family:Chakra Petch">Directamente desde el siguiente botón</p>
+    <a class="button-53" role="button" href="#categoria">VER PRODUCTOS</a>
+</div>
+<br><br>
+
+{% endblock banner-slider %}
+
+{% block information %}
+<div class="container">
+    <div class="row bg text-center p-5 text-dark border-bottom shadow" id="categoria" >
+        <h1 style="font-family:Signika Negative">¡Bienvenido!</h1>
+        <small class="fs-5" style="font-family:Chakra Petch">{% lorem 2 p random %}
+        </small>
+    </div>
+</div>
+{% endblock information %}
+
+{% block main-content %}
+      <div class="justify-content-center" >
+        <br>
+        <div class="wrapper-grid" style="justify-content:center;display:grid; grid-template-columns:repeat(auto-fit, 16rem);">
+          <div class="card" style="width: 15rem; margin:10px" >
+              <img src="{% static 'app/images/product/BOMBAS.PNG' %}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Bombas</h5>
+                <a href="{% url 'category' 'BO' %}" class="btn btn-success">IR</a>
+              </div>
+          </div>
+          <div class="card" style="width: 15rem; margin:10px" id="categoria">
+              <img src="{% static 'app/images/product/ELECTRICIDAD.JPG' %}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Electricidad</h5>
+                <a href="{% url 'category' 'EL' %}" class="btn btn-success">IR</a>
+              </div>
+          </div>
+          <div class="card" style="width: 15rem; margin:10px" id="categoria">
+              <img src="{% static 'app/images/product/POLIETILENO.PNG' %}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Polietileno</h5>
+                <a href="{% url 'category' 'PP' %}" class="btn btn-success">IR</a>
+              </div>
+          </div>
+          <div class="card" style="width: 15rem; margin:10px" id="categoria">
+              <img src="{% static 'app/images/product/REVESTIMIENTO.PNG' %}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Revestimiento</h5>
+                <a href="{% url 'category' 'RE' %}" class="btn btn-success">IR</a>
+              </div>
+          </div>
+          <div class="card" style="width: 15rem; margin:10px" id="categoria">
+              <img src="{% static 'app/images/product/TUBERIA.PNG' %}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Tubería</h5>
+                <a href="{% url 'category' 'TU' %}" class="btn btn-success">IR</a>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div id="banner" class="section-m1" style="padding: 5px 0px;display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
+        <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
+      </div>
+    
+{% endblock main-content %}

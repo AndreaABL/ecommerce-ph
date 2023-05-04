@@ -1,0 +1,36 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Iniciar sesión{% endblock title %}
+
+{% block main-content %}
+    <div class="container">
+        <div class="row my-3">
+            <div class="col-sm-6 offset-sm-3">
+                <h3 style="font-family:Signika Negative">Iniciar sesión</h3>
+                <form action="" method="post" novalidate class="shadow p-5">
+                    {% csrf_token %}
+                    {% for fm in form  %}
+                    <br>
+                        {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+                    {% endfor %}
+                    <br>
+                    <small><a href="{% url 'password_reset' %}" style="font-family:Chakra Petch; color:green; font-size:16px">¿Olvidó su contraseña?</a></small>
+                    <br><br>
+                    <input type="submit" class="btn btn-success nt-5" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px" value="Entrar">
+                    <div class="text-center text-primary fw-bold"  style="font-family:Chakra Petch">
+                        <br>
+                        <small style="color:black">¿Nuevo usuario? <a href="{% url 'customerregistration' %}" class="text-success">Crear nueva cuenta</a></small>
+                    </div>
+
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors  %}
+                            <p class="alert alert-danger my-3">{{error}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock main-content %}
