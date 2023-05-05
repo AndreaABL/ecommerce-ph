@@ -12,6 +12,7 @@ class CustomerRegistrationForm(UserCreationForm):
     username = forms.CharField(label='Nombre de usuario',widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    password2 = forms.CharField(label='Confirme su contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
   
     class Meta:
         model = User

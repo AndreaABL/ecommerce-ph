@@ -1,1 +1,1 @@
-web: gunicorn ecomph.wsgi --log-file -
+web: gunicorn ecomph.wsgi:apllication --log-file -
