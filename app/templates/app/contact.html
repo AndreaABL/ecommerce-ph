@@ -4,15 +4,12 @@
 
 
 {% block banner-slider %}
-<div id="banner" class="section-m1" style="padding: 5px 0px; display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; height:30px; background-size:cover; background-position:cover;">
+<div id="banner" class="section-p1" style="padding: 5px 0px; display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; height:30vh; background-size:cover; background-position:cover;">
   <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
 </div>
 {% endblock banner-slider %}
-
-
 {% block main-content %}
-<br><br><br><br><br>
-  <div class="container section-p1 " id="contact-details">
+  <div class="container section-p1" id="contact-details">
     <div class="details">
       <h2 style="font-size:46px; font-family:Signika Negative; line-height:54px">Visítanos</h2>
       <h3>Estamos ubicados en</h3>
@@ -35,7 +32,8 @@
         </li>
       </div>
     </div>
-    <div class="map d-flex">
+    <br><br>
+    <div class="map" style:"padding-top:30px">
       <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2700.00353126245!2d-71.09185497437761!3d-34.98551173415718!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2scl!4v1676493799187!5m2!1ses-419!2scl" width="600" height="450" style="border:0; display:flex;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>

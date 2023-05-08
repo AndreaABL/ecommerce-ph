@@ -4,9 +4,6 @@
     font-family: 'Chakra Petch', sans-serif;
     
 }
-
-
-
 /*Whatsapp*/
 .float{
 	position:fixed;
@@ -33,7 +30,7 @@
 }
 
 .section-p1 {
-    padding: 40px 80px;
+    padding: 20px 20px;
 }
 
 .section-m1 {
@@ -44,11 +41,11 @@
 
 @media screen and (max-width:977px) {
     .section-p1 {
-        padding: 10px;
+        padding: 40px;
     }
 
     .section-m1 {
-        padding-bottom: 30%;
+        padding-top: 10px;
         
     }
     
@@ -150,11 +147,13 @@
 
 .blockcode {
     margin-top: 10px;
+
 }
 
 @media screen and (max-width:977px){
     .blockcode {
         justify-content: space-between;
+        padding-bottom: 20px;
     }
     
     .ml-2 {
@@ -162,7 +161,7 @@
     }
 
     .logo {
-        width: 120px;
+        width: 100px;
     }
 
     .boton {
@@ -219,7 +218,6 @@
 
 #about-head .carousel {
     width: 100%;
-    height: 70vh;
 }
 
 #about-head .row {
@@ -229,7 +227,7 @@
 @media screen and (max-width:977px){
     #about-head {
         flex-direction: column;
-        padding-bottom: 70px;
+        padding-bottom: 50px;
     }
 
     #about-head .carousel {
@@ -284,6 +282,8 @@
 #contact-details .map {
     width: 55%;
     height: 400px;
+    display: flex;
+    margin: 70px 30px;
 }
 
 #contact-details .map .iframe {
@@ -296,15 +296,19 @@
         flex-direction: column;
         display: block;
         line-height: 0;
+        margin-bottom: 10px;
+        
     }
 
     #contact-details .details {
         width: 100%;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        padding-top:10px ;
     }
 
     #contact-details .map {
         width: 100%;
+        margin: 50px 10px;
     }
     
 }
