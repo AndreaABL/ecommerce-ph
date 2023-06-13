@@ -8,7 +8,7 @@
         {% for msg in messages %}
             <div class="alert alert-danger" role="alert">
                 {{msg}}
-            </div>    
+            </div>
         {% endfor %}
     {% endif %}
 <div class="row mt-4">
@@ -19,9 +19,9 @@
         <div class="card mb-2">
             <div class="card-body">
                 <img src="{{item.product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="200" width="100">
-                <h5>{{item.product.title}}</h5>
-                <p>Cantidad: {{item.quantity}}</p>
-                <p class="fw-bold">Precio:  ${{item.product.selling_price}}</p>
+                <h5 id="title">{{item.product.title}}</h5>
+                <p id="quantity">Cantidad: {{item.quantity}}</p>
+                <p class="fw-bold" id="unit_price">Precio: ${{item.product.selling_price}}</p>
             </div>
         </div>
         {% endfor %}
@@ -50,34 +50,56 @@
                 </form>
                 <br>
                 <div class="form-group">
-                    <button class="btn btn-success" id="calculate" onclick="calcRoute()">Calcular</button>
+                    <button class="btn btn-success" id="calculate" onclick="calcRoute()">Ver distancia</button>
                 </div>
-            
+
                 <div class="container-fluid" id="most">
                     <div id="output" class="output" style="text-align:center; font-size:17px; margin:10px auto;">
                     </div>
+
                     <div id="totalcost" class="totalcost" style="text-align:center; font-size:17px; margin:10px auto;">
                     </div>
-        
+
                     <div id="googleMap" style="width:80%; height:300px; margin:10px auto"></div>
                 </div>
             </div>
         <button class="btn btn-outline-success" id="ocul" type="button" onclick="ocultar()">Retiro en tienda</button>
         <br>
-        <form method="post" id = "myform">
+
+        <form id="form" action="https://formspree.io/f/meqwbvja" method="POST">
+
             {% csrf_token %}
-            <div class="form-check mb-2">
-                
-                <label  class="form-label" style="font-size:20px"><strong>Monto Total</strong></label>
-                <input type="number" class="form-control" id="totalamount" onclick="ocultar()" value={{totalamount}} readonly style="display:none;">
-                <input type="number" class="form-control" id="totalamountt" onclick="calcRoute()" value={{totalamount}} readonly style="display:none;">
-            </div>
+            <input name="cliente" class="form-control" value={{request.user.username}} style="display:none;">
+
+            {% for item in cart_items  %}
+            <input name="titulo" class="form-control" value={{item.product.title}} style="display:none;">
+            <input name="cantidad" class="form-control" value={{item.quantity}} style="display:none;">
+            <input name="precio" class="form-control" value={{item.product.selling_price}}  style="display:none;">
+            {% endfor %}
+
+                <label  class="form-label" style="font-size:17px;"><i class="fa-solid fa-money-bill-1-wave fa-shake" style="color:green"></i>      <strong>Monto Total </strong></label>
+
+                <input type="number" name="sinenvio" class="form-control" id="totalamount" onclick="ocultar()" value={{totalamount}} readonly style="display:none;">
+
+                <input type="number" name="conenvio" class="form-control" id="totalamountt" onclick="calcRoute()" value={{totalamount}} readonly style="display:none;">
+                <br>
+                <label  class="form-label" style="font-size:15px; display:none;" id="correo"><i class="fa-solid fa-circle-info fa-beat-fade" style="color:green"></i>  <strong>Déjanos tus datos para ponernos en contacto contigo </strong>
+                    <br>
+
+                    <input type="text" name="nombre" placeholder="Nombre" class="form-control" >
+                    <br>
+                    <input type="email" name="correo" placeholder="Correo" class="form-control" >
+                    <br>
+                    <input type="number" name="contacto" placeholder="Número de contacto" class="form-control" >
+                </label>
+
+            <br><br>
             <div class="text-end">
-                {% comment "" %}<button type="submit" class="btn tn-warning mt-3 px-5 fw-bold">Continuar</button>{% endcomment %}
-                <button id="webpay-btn" type="submit" class="btn btn-success mt-3 px-5 ">Pagar</button>
-            </div>     
+                <button type="submit" class="btn btn-success" id="info" style="display:none;">Enviar información</button>
+            </div>
+
         </form>
-        
+
         </div>
     </div>
     </div>
@@ -86,7 +108,9 @@
 {% endblock main-content %}
 
 {% block payment-gateway %}
+
 {% endblock payment-gateway %}
+
 
 
 

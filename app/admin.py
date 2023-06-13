@@ -21,7 +21,7 @@ class CartModelAdmin(admin.ModelAdmin):
 
 @admin.register(Payment)
 class PaymentModelAdmin(admin.ModelAdmin):
-    list_display=['id', 'user', 'amount', 'webpay_order_id', 'webpay_payment_status', 'webpay_payment_id', 'paid']
+    list_display=['id', 'user', 'amount', 'mercadopago_order_id', 'mercadopago_payment_status', 'mercadopago_payment_id', 'paid']
 
 @admin.register(OrderPlaced)
 class OrderPlacedModelAdmin(admin.ModelAdmin):

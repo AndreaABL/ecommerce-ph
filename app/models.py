@@ -1,5 +1,7 @@
+
 from django.db import models
 from django.contrib.auth.models import User
+
 
 # Create your models here.
 STATE_CHOICES = (
@@ -39,6 +41,7 @@ class Product(models.Model):
     prodapp = models.TextField(default='')
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
     product_image = models.ImageField(upload_to='product')
+    stock = models.IntegerField(default=0)
 
     def __str__(self) :
         return self.title
@@ -51,10 +54,10 @@ class Customer(models.Model):
     mobile = models.IntegerField(verbose_name='Teléfono' ,default=0)
     zipcode = models.IntegerField(verbose_name='Código postal')
     state = models.CharField(verbose_name='Región', choices=STATE_CHOICES, max_length=100)
-    
+
     def __str__(self) :
         return self.name
-    
+
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -73,14 +76,18 @@ STATUS_CHOICES = (
     ('Cancelado', 'Cancelado'),
     ('Pendiente', 'Pendiente'),
 )
-    
+
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.FloatField()
-    webpay_order_id = models.CharField(max_length=100, blank=True, null=True)
-    webpay_payment_status = models.CharField(max_length=100, blank=True, null=True)
-    webpay_payment_id = models.CharField(max_length=100, blank=True, null=True)
+    mercadopago_order_id = models.CharField(max_length=100, blank=True, null=True)
+    mercadopago_payment_status = models.CharField(max_length=100, blank=True, null=True)
+    mercadopago_payment_id = models.CharField(max_length=100, blank=True, null=True)
     paid = models.BooleanField(default=False)
+
+    @property
+    def __str__(self):
+        return self.description
 
 class OrderPlaced(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -94,3 +101,4 @@ class OrderPlaced(models.Model):
     @property
     def total_cost(self):
         return self.quantity * self.product.selling_price
+

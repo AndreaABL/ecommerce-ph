@@ -9,9 +9,11 @@ from .views import *
 from django.urls import path, include
 
 urlpatterns = [
-    path('home/', views.home, name = "home"),
+    path('', views.home, name = "home"),
     path('about/', views.about, name = "about"),
     path('contact/', views.contact,name="contact"),
+    path('orders/', views.orders, name='orders'),
+
     path('category/<slug:val>', views.CategoryView.as_view(), name="category"),
     path('category-title/<val>', views.CategoryTitle.as_view(),name="category-title"),
     path('product-detail/<int:pk>', views.ProductDetail.as_view(), name="product-detail"),
@@ -21,6 +23,8 @@ urlpatterns = [
     path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
     path('cart/', views.show_cart, name='showcart'),
     path('checkout/', views.checkout.as_view(), name='checkout'),
+
+
     path('pluscart/', views.plus_cart),
     path('minuscart/', views.minus_cart),
     path('removecart/', views.remove_cart),

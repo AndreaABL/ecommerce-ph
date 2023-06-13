@@ -18,11 +18,14 @@ def about(request):
 def contact(request):
     return render(request, "app/contact.html")
 
+def orders(request):
+    return render(request, "app/orders.html")
+
 class CategoryView(View):
     def get(self, request, val):
         product = Product.objects.filter(category=val)
         title = Product.objects.filter(category=val).values('title')
-        
+
         return render(request, "app/category.html", locals())
 
 class CategoryTitle(View):
@@ -30,12 +33,12 @@ class CategoryTitle(View):
         product = Product.objects.filter(title=val)
         title = Product.objects.filter(category=product[0].category).values('title')
         return render(request, "app/category.html", locals())
-    
+
 
 class ProductDetail(View):
     def get(self, request, pk):
         product = Product.objects.get(pk=pk)
-        
+
         return render(request, "app/productdetail.html", locals())
 
 class CustomerRegistrationView(View):
@@ -51,7 +54,7 @@ class CustomerRegistrationView(View):
         else:
             messages.warning(request, "Datos inválidos")
         return render(request, 'app/customerregistration.html', locals())
-    
+
 class ProfileView(View):
     def get(self, request):
         form = CustomerProfileForm()
@@ -108,6 +111,7 @@ def add_to_cart(request):
     Cart(user=user,product=product).save()
     return redirect('/cart')
 
+
 def show_cart(request):
     user = request.user
     cart = Cart.objects.filter(user=user)
@@ -115,20 +119,9 @@ def show_cart(request):
     for p in cart:
         value = p.quantity * p.product.selling_price
         amount = amount + value
-    totalamount = amount 
+    totalamount = amount
     return render(request, 'app/addtocart.html', locals())
 
-class checkout(View):
-    def get(self,request):
-        user = request.user
-        add=Customer.objects.filter(user=user)
-        cart_items = Cart.objects.filter(user=user)
-        famount = 0
-        for p in cart_items:
-            value = p.quantity * p.product.selling_price
-            famount = famount + value
-        totalamount = famount
-        return render(request, 'app/checkout.html', locals())
 
 def plus_cart(request):
     if request.method == 'GET':
@@ -169,7 +162,7 @@ def minus_cart(request):
             'totalamount':totalamount
         }
         return JsonResponse(data)
-    
+
 def remove_cart(request):
     if request.method == 'GET':
         prod_id=request.GET['prod_id']
@@ -188,7 +181,29 @@ def remove_cart(request):
         }
         return JsonResponse(data)
 
+
 def search(request):
     query = request.GET['search']
     product = Product.objects.filter(Q(title__icontains=query))
     return render(request, 'app/search.html', locals())
+
+
+class checkout(View):
+    def get(self,request):
+        user = request.user
+        add=Customer.objects.filter(user=user)
+        cart_items = Cart.objects.filter(user=user)
+        famount = 0
+        for p in cart_items:
+            value = p.quantity * p.product.selling_price
+            famount = famount + value
+        totalamount = famount
+        return render(request, 'app/checkout.html', locals())
+
+
+
+
+
+
+
+

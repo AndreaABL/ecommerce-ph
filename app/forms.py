@@ -13,7 +13,7 @@ class CustomerRegistrationForm(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
     password2 = forms.CharField(label='Confirme su contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
-  
+
     class Meta:
         model = User
         fields = ['username','email','password1','password2']
@@ -44,4 +44,4 @@ class CustomerProfileForm(forms.ModelForm):
             'state':forms.Select(attrs={'class':'form-control'}),
             'zipcode':forms.TextInput(attrs={'class':'form-control'}),
         }
-        
+

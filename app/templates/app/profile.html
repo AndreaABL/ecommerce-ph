@@ -5,8 +5,10 @@
 {% block main-content %}
 <div class="container my-5">
     <div class="row">
-        <h3 style="font-family:Signika Negative">Bienvenido/a <span class="text-capitalize">{{request.user}}</span></h3>
+        <h3 style="font-family:Signika Negative; text-align: center">Bienvenido/a <span class="text-capitalize">{{request.user}}</span></h3>
+        <h5 style="text-align: center">Porfavor ingresa tus datos para entregarte una mejor atención <i class="fa-sharp fa-regular fa-face-smile" style="color: #19671e;"></i></h5>
     </div>
+    <br>
     <div class="col-sm-2 border-end">
         <ul class="list-unstyled" >
             <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-success" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Perfil</a></li>
