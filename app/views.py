@@ -2,15 +2,13 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import JsonResponse
-from . models import Product, Customer, Cart
+from . models import Product, Customer, Cart, Category
 from django.db.models import Count
 from . forms import CustomerRegistrationForm, CustomerProfileForm, Customer
 from django.contrib import messages
 from django.db.models import Q
 
 # Create your views here.
-def home (request):
-    return render(request, "app/home.html")
 
 def about(request):
     return render(request, "app/about.html")
@@ -21,23 +19,26 @@ def contact(request):
 def orders(request):
     return render(request, "app/orders.html")
 
-class CategoryView(View):
-    def get(self, request, val):
-        product = Product.objects.filter(category=val)
-        title = Product.objects.filter(category=val).values('title')
 
-        return render(request, "app/category.html", locals())
+def category_list(request):
+    categories = Category.objects.filter(parent_category = None)
+    return render(request, 'app/home.html', {'categories': categories})
 
-class CategoryTitle(View):
-    def get(self, request, val):
-        product = Product.objects.filter(title=val)
-        title = Product.objects.filter(category=product[0].category).values('title')
-        return render(request, "app/category.html", locals())
+def category_detail(request, category_id):
+    category = Category.objects.get(pk=category_id)
+    subcategories = category.subcategories.all()
+    products = Product.objects.filter(category=category)
+    return render(request, 'app/category.html', {'category': category, 'subcategories': subcategories, 'products': products })
 
+def product_filter(request):
+    query = request.GET.get('q')
+    products = Product.objects.filter(Q(name__icontains=query) | Q(category__name__icontains=query))
+    return render(request, 'app/product_filter.html', {'products': products})
 
 class ProductDetail(View):
     def get(self, request, pk):
         product = Product.objects.get(pk=pk)
+        item_product =Product.objects.filter(item=1)
 
         return render(request, "app/productdetail.html", locals())
 

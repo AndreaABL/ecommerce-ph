@@ -19,7 +19,7 @@
         <div class="card mb-2">
             <div class="card-body">
                 <img src="{{item.product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="200" width="100">
-                <h5 id="title">{{item.product.title}}</h5>
+                <h5 id="title">{{item.product.name}}</h5>
                 <p id="quantity">Cantidad: {{item.quantity}}</p>
                 <p class="fw-bold" id="unit_price">Precio: ${{item.product.selling_price}}</p>
             </div>
@@ -72,7 +72,7 @@
             <input name="cliente" class="form-control" value={{request.user.username}} style="display:none;">
 
             {% for item in cart_items  %}
-            <input name="titulo" class="form-control" value={{item.product.title}} style="display:none;">
+            <input name="titulo" class="form-control" value={{item.product.name}} style="display:none;">
             <input name="cantidad" class="form-control" value={{item.quantity}} style="display:none;">
             <input name="precio" class="form-control" value={{item.product.selling_price}}  style="display:none;">
             {% endfor %}

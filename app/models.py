@@ -33,18 +33,27 @@ CATEGORY_CHOICES = (
     ('TU', 'Tuberia'),
 )
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    parent_category = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='subcategories')
+    category_image = models.ImageField(upload_to='category')
+    subcategory_image = models.ImageField(upload_to='subcategory')
+
+    def __str__(self):
+        return self.name
 class Product(models.Model):
-    title = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     selling_price = models.IntegerField()
     description = models.TextField()
     composition = models.TextField(default='')
     prodapp = models.TextField(default='')
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
     product_image = models.ImageField(upload_to='product')
     stock = models.IntegerField(default=0)
+    item = models.BooleanField(default=False, help_text='0=default, 1=item')
 
     def __str__(self) :
-        return self.title
+        return self.name
 
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

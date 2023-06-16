@@ -1,12 +1,16 @@
 from django.contrib import admin
-from . models import Product, Customer, Cart, Payment, OrderPlaced
+from . models import Product, Customer, Cart, Payment, OrderPlaced, Category
 from django.urls import reverse
 from django.utils.html import format_html
 # Register your models here.
 
 @admin.register(Product)
 class ProductModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'description', 'category', 'product_image']
+    list_display = ['id', 'name', 'description', 'category', 'product_image']
+
+@admin.register(Category)
+class CategoryModelAdmin(admin.ModelAdmin):
+    list_display = ['name', 'parent_category']
 
 @admin.register(Customer)
 class CustomerModelAdmin(admin.ModelAdmin):

@@ -12,7 +12,8 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9.4.1/swiper-bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/swiper@9.4.1/modules/scrollbar/scrollbar.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -52,11 +53,9 @@
                 Productos
               </a>
               <ul class="dropdown-menu ">
-                <li><a class="dropdown-item" href="{% url 'category' 'BO' %}">Bombas</a></li>
-                <li><a class="dropdown-item" href="{% url 'category' 'EL' %}">Electricidad</a></li>
-                <li><a class="dropdown-item" href="{% url 'category' 'PP' %}">Polietileno</a></li>
-                <li><a class="dropdown-item" href="{% url 'category' 'RE' %}">Revestimiento</a></li>
-                <li><a class="dropdown-item" href="{% url 'category' 'TU' %}">Tubería</a></li>
+                {% for category in categories %}
+                  <li><a class= "dropdown-item"href="{% url 'category_detail' category_id=category.id %}">{{ category.name }}</a></li>
+                {% endfor %}
               </ul>
             </li>
             <li class="nav-item">
@@ -128,6 +127,7 @@
     {% block banner-slider %}{% endblock banner-slider %}
     {% block information %}{% endblock information %}
     {% block main-content %}{% endblock main-content %}
+
     {% block payment-gateway %}{% endblock payment-gateway %}
 
 

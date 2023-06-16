@@ -25,46 +25,24 @@
 {% endblock information %}
 
 {% block main-content %}
-      <div class="justify-content-center" >
-        <br>
-        <div class="wrapper-grid" style="justify-content:center;display:grid; grid-template-columns:repeat(auto-fit, 16rem);">
-          <div class="card" style="width: 15rem; margin:10px" >
-              <img src="{% static 'app/images/bomba.png' %}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Bombas</h5>
-                <a href="{% url 'category' 'BO' %}" class="btn btn-success">IR</a>
-              </div>
+        
+        <div class="justify-content-center" >
+          <br>
+          <div class="wrapper-grid" style="justify-content:center;display:grid; grid-template-columns:repeat(auto-fit, 14rem);">
+            {% for category in categories  %}
+            <div class="card" style="width: 13rem; margin:7px" >
+                <img src="{{category.category_image.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{category.name}}</h5>
+                  <a href="{% url 'category_detail' category_id=category.id %}" class="btn btn-success">IR</a>
+                </div>
+            </div>
+            {% endfor %}
           </div>
-          <div class="card" style="width: 15rem; margin:10px" id="categoria">
-              <img src="{% static 'app/images/ELECTRICIDAD.jpg' %}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Electricidad</h5>
-                <a href="{% url 'category' 'EL' %}" class="btn btn-success">IR</a>
-              </div>
-          </div>
-          <div class="card" style="width: 15rem; margin:10px" id="categoria">
-              <img src="{% static 'app/images/POLIETILENO.png' %}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Polietileno</h5>
-                <a href="{% url 'category' 'PP' %}" class="btn btn-success">IR</a>
-              </div>
-          </div>
-          <div class="card" style="width: 15rem; margin:10px" id="categoria">
-              <img src="{% static 'app/images/reves.png' %}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Revestimiento</h5>
-                <a href="{% url 'category' 'RE' %}" class="btn btn-success">IR</a>
-              </div>
-          </div>
-          <div class="card" style="width: 15rem; margin:10px" id="categoria">
-              <img src="{% static 'app/images/tub.png' %}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Tubería</h5>
-                <a href="{% url 'category' 'TU' %}" class="btn btn-success">IR</a>
-              </div>
-          </div>
+          
         </div>
-      </div>
+        
+            
       <div id="banner" class="section-m1" style="padding: 5px 0px;display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
         <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
       </div>

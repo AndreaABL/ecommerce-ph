@@ -10,7 +10,7 @@
 
             </div>
             <div class="productdetail col-lg-6">
-                <h1 style="font-family:Signika Negative; font-size: 35px;">{{product.title}}
+                <h1 style="font-family:Signika Negative; font-size: 35px;">{{product.name}}
                 <h5 style="font-family:Chakra Petch; color:green" class="fw-bold fs-3">${{product.selling_price}}</h5>
                 <br><h4 style="font-family:Signika Negative">Información adicional</h4>
                 <ul class="fs-5" style="font-family: Chakra Petch;">
@@ -19,22 +19,18 @@
                     <li>{{product.prodapp}}</li>
                 </ul>
                 <h6>Stock: {{product.stock}}</h6>
-                    <form action="/add-to-cart" class="d-inline">
-                        <input type="hidden" name="prod_id" value={{product.id}} />
-                        {% if request.user.is_authenticated %}
-                        <button type="submit" class="btn btn-success shadow py-2" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Añadir al carro</button>
-                    </form>
-                        {% else %}
-                        <a href="{% url 'login' %}" class="btn btn-success shadow py-2" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Añadir al carro</a>
-
-                    {% endif %}
-
-
+                <form action="/add-to-cart" class="d-inline">
+                    <input type="hidden" name="prod_id" value={{product.id}} />
+                    {% if request.user.is_authenticated %}
+                    <button type="submit" class="btn btn-success shadow py-2" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Añadir al carro</button>
+                </form>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-success shadow py-2" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Añadir al carro</a>
+                {% endif %}
             </div>
-
         </div>
     </div>
-
+    <br><br>
 {% endblock main-content %}
 
 

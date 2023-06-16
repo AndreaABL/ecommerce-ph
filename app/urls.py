@@ -9,13 +9,15 @@ from .views import *
 from django.urls import path, include
 
 urlpatterns = [
-    path('', views.home, name = "home"),
+    path('home/' , views.category_list, name='home'),
     path('about/', views.about, name = "about"),
     path('contact/', views.contact,name="contact"),
     path('orders/', views.orders, name='orders'),
+    
+    path('categories/<int:category_id>/', views.category_detail, name='category_detail'),
+    
 
-    path('category/<slug:val>', views.CategoryView.as_view(), name="category"),
-    path('category-title/<val>', views.CategoryTitle.as_view(),name="category-title"),
+
     path('product-detail/<int:pk>', views.ProductDetail.as_view(), name="product-detail"),
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('address/', views.address, name='address'),
