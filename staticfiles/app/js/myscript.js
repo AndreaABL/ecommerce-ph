@@ -53,11 +53,14 @@ $('.remove-cart').click(function(){
     })
 })
 
+
+
 function mostrar() {
     document.getElementById('most').style.display = 'block';
     document.getElementById('ocul').style.display = 'none';
     document.getElementById('atras').style.display = 'block';
     document.getElementById('totalamount').style.display = 'none';
+    document.getElementById('correo').style.display = 'none';
 }
 
 function atras(){
@@ -65,6 +68,7 @@ function atras(){
     document.getElementById('atras').style.display='none';
     document.getElementById('ocul').style.display = 'block';
     document.getElementById('totalamount').style.display = 'none';
+    document.getElementById('correo').style.display = 'none';
 
 }
 
@@ -72,7 +76,8 @@ function ocultar(){
     document.getElementById('ocul').style.display = 'block';
     document.getElementById('totalamount').style.display = 'block';
     document.getElementById('totalamountt').style.display = 'none';
-    
+    document.getElementById('correo').style.display = 'block';
+    document.getElementById('info').style.display = 'block';
 }
 
 $(function initMap() {
@@ -113,6 +118,7 @@ function calcRoute() {
         unitSystem: google.maps.UnitSystem.METRIC,
     };
 
+
     directionsService.route(request, function(result, status) {
         if (status == google.maps.DirectionsStatus.OK) {
             const output = document.querySelector("#output");
@@ -125,10 +131,16 @@ function calcRoute() {
             "<div> <i class='fa-solid fa-sack-dollar fa-bounce' style='font-size:20px; color:#B9A708'></i> : $" + parseFloat(result.routes[0].legs[0].distance.text) * parseFloat(1472) + "</div>";        
             
             var totalcos = parseFloat(result.routes[0].legs[0].distance.text) * parseFloat(1472)
-            var totalfinal = Number(total) + (totalcos);
+            var totalfinal = Number(total) + (totalcos)
+
+            
             document.getElementById('totalamountt').value = totalfinal;
             document.getElementById('totalamountt').style.display = 'block';
             document.getElementById('totalamount').style.display = 'none';
+            document.getElementById('correo').style.display = 'block';
+            document.getElementById('info').style.display = 'block';
+            
+
         
         directionsDisplay.setDirections(result);    
         } else {
@@ -139,3 +151,61 @@ function calcRoute() {
         }
     });
 }
+
+$('.costototal').click(function(){
+    var id=$(this).attr("totalcost").toString();
+    console.log("pid =", id)
+    $.ajax({
+        type:'GET',
+        url:'/costototal',
+        data:{
+            prod_id:id
+        },
+        success:function(data){
+            console.log("data = " ,data);
+            document.getElementById('amount').innerText=data.amount
+            document.getElementById('totalcost').innerText=data.totalamount
+        }
+    })
+})
+
+const $form = document.querySelector('#form')
+
+$form.addEventListener('submit', handleSubmit)
+async function handleSubmit(event) {
+    event.preventDefault()
+    const form = new FormData(this)
+    const response = await fetch(this.action, {
+        method:this.method,
+        body:form, 
+        headers: {
+            'Accept':'application/json'
+        }
+    })
+    if (response.ok) {
+        this.reset()
+        alert('Gracias por enviar tu información, te contactaremos a la brevedad')
+    }
+}
+
+//const form = document.getElementById("form");
+
+
+//form.addEventListener('submit', function(e) {
+//    e.preventDefault();
+
+  //  const payload = new FormData(form)
+
+
+    //console.log([...payload])
+
+    //fetch('/checkout' , {
+      //  method:'POST',
+       // body: payload,
+    //})
+    //.then(res=> res.json())
+    //.then(data => console.log(data))
+    //.catch(err=>console.log(err));
+    
+//})
+
