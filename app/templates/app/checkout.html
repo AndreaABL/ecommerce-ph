@@ -21,7 +21,8 @@
                 <img src="{{item.product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="200" width="100">
                 <h5 id="title">{{item.product.name}}</h5>
                 <p id="quantity">Cantidad: {{item.quantity}}</p>
-                <p class="fw-bold" id="unit_price">Precio: ${{item.product.selling_price}}</p>
+                {% load humanize %}
+                <p class="fw-bold" id="unit_price">Precio: ${{item.product.selling_price|intcomma}}</p>
             </div>
         </div>
         {% endfor %}
@@ -74,13 +75,14 @@
             {% for item in cart_items  %}
             <input name="titulo" class="form-control" value={{item.product.name}} style="display:none;">
             <input name="cantidad" class="form-control" value={{item.quantity}} style="display:none;">
-            <input name="precio" class="form-control" value={{item.product.selling_price}}  style="display:none;">
+            {% load humanize %}
+            <input name="precio" class="form-control" value={{item.product.selling_price|intcomma}}  style="display:none;">
             {% endfor %}
 
                 <label  class="form-label" style="font-size:17px;"><i class="fa-solid fa-money-bill-1-wave fa-shake" style="color:green"></i>      <strong>Monto Total </strong></label>
-
+                {% load humanize %}
                 <input type="number" name="sinenvio" class="form-control" id="totalamount" onclick="ocultar()" value={{totalamount}} readonly style="display:none;">
-
+                {% load humanize %}
                 <input type="number" name="conenvio" class="form-control" id="totalamountt" onclick="calcRoute()" value={{totalamount}} readonly style="display:none;">
                 <br>
                 <label  class="form-label" style="font-size:15px; display:none;" id="correo"><i class="fa-solid fa-circle-info fa-beat-fade" style="color:green"></i>  <strong>Déjanos tus datos para ponernos en contacto contigo </strong>
@@ -104,6 +106,9 @@
     </div>
     </div>
 </div>
+</div>
+<div id="banner" class="section-m1" style="margin: 20px 0; display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
+        <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
 </div>
 {% endblock main-content %}
 

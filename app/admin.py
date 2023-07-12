@@ -6,7 +6,20 @@ from django.utils.html import format_html
 
 @admin.register(Product)
 class ProductModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'description', 'category', 'product_image']
+    list_display = ['id', 'name', 'description', 'category', 'product_image', 'stock']
+    search_fields = ['name']
+    actions = ['increase_stock', 'decrease_stock']
+
+    def increase_stock(self, request, queryset):
+        for product in queryset:
+            product.stock_quantity += 1
+            product.save()
+
+    def decrease_stock(self, request, queryset):
+        for product in queryset:
+            if product.stock_quantity > 0:
+                product.stock_quantity -= 1
+                product.save()
 
 @admin.register(Category)
 class CategoryModelAdmin(admin.ModelAdmin):

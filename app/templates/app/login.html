@@ -6,6 +6,7 @@
     <div class="container">
         <div class="row my-3">
             <div class="col-sm-6 offset-sm-3">
+                <br><br>
                 <h3 style="font-family:Signika Negative">Iniciar sesión</h3>
                 <form action="" method="post" novalidate class="shadow p-5">
                     {% csrf_token %}
@@ -14,6 +15,8 @@
                         {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
                     {% endfor %}
                     <br>
+
+
                     <small><a href="{% url 'password_reset' %}" style="font-family:Chakra Petch; color:green; font-size:16px">¿Olvidó su contraseña?</a></small>
                     <br><br>
                     <input type="submit" class="btn btn-success nt-5" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px" value="Entrar">
@@ -30,6 +33,9 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div id="banner" class="section-m1" style="margin: 20px 0; display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
+        <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
     </div>
 
 

@@ -185,7 +185,7 @@ def remove_cart(request):
 
 def search(request):
     query = request.GET['search']
-    product = Product.objects.filter(Q(title__icontains=query))
+    product = Product.objects.filter(Q(name__icontains=query))
     return render(request, 'app/search.html', locals())
 
 
