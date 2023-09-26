@@ -20,6 +20,7 @@
     <link rel="shortcut icon" href="{% static 'app/images/HOJA.png' %}" />
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Signika+Negative&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    
     <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}" />
     <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}" />
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}"/>
@@ -115,36 +116,55 @@
 
     {% block payment-gateway %}{% endblock payment-gateway %}
 
+    <a href="https://api.whatsapp.com/send?phone=56922358252&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
+      <i class="fa-brands fa-whatsapp my-float"></i>
+      </a>
+
 
     <div class="blockcode">
-      <footer class="page-footer shadow">
-        <div
-          class="d-flex flex-wrap justify-content-between align-items-center mx-auto py-4"
-          style="width: 90%"
-        >
-          <div class="d-flex flex-wrap align-items-center" >
-            <a href="{% url 'home' %}" class="d-flex align-items-center p-0 text-dark">
-              <img alt="logo" class="logo" src="{% static 'app/images/HEADER-removebg-preview.png' %}" width="150px" />
-            </a>
-            <span
-              style="
-                            font-size: 3em;
-                            margin: -2rem 0px -1.5rem 1rem;
-                            color: #c4c4c4;
-                          "
-              ></span
-            >
-            <small class="ml-2">&copy; Proyectos Hidráulicos, 2023. Todos los derechos reservados.</small>
-          </div>
-          <div>
-            <button class="btn btn-success btn-flat p-2 boton">
-              <a href="https://web.facebook.com/proyectos.hidraulicos.7" target="_blank" style="color:white"><i class="fa-brands fa-square-facebook"></i></a>
-            </button>
-            <button class="btn btn-success btn-flat p-2 boton">
-              <a href="https://www.instagram.com/hidraulicosproyectos2023" target="_blank" style="color:white"><i class="fa-brands fa-instagram"></i></a>
-            </button>
-          </div>
+      <footer class="text-center text-white" style="background-color: #f1f1f1;">
+        <!-- Grid container -->
+        <div class="container pt-4">
+          <!-- Section: Social media -->
+          <section class="mb-4">
+            <a
+                  class="btn text-white btn-floating m-1"
+                  style="background-color: #3b5998;"
+                  href="https://web.facebook.com/proyectos.hidraulicos.7"
+                  role="button"
+                  target="_blank"
+                  ><i class="fab fa-facebook-f"></i
+                ></a>
+          
+                <!-- Gmail -->
+                <a
+                  class="btn text-white btn-floating m-1"
+                  style="background-color: #dd4b39;"
+                  href="mailto:administracion@proyectoshidraulicos.cl"
+                  role="button"
+                  target="_blank"
+                  ><i class="fa-solid fa-envelope"></i></a>
+          
+                <!-- Instagram -->
+                <a
+                  class="btn text-white btn-floating m-1 instagram"
+                  style="background-color:  #d6249f;"
+                  href="https://www.instagram.com/prohidraulicosltda/"
+                  role="button"
+                  target="_blank"
+                  ><i class="fa-brands fa-instagram"></i></a>
+
+          </section>
+          <!-- Section: Social media -->
         </div>
+        <!-- Grid container -->
+      
+        <!-- Copyright -->
+        <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          <small class="ml-2">&copy; Proyectos Hidráulicos, 2023. Todos los derechos reservados.</small>
+
+        </div>
+        <!-- Copyright -->
       </footer>
     </div>
 

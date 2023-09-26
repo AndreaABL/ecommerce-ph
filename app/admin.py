@@ -12,13 +12,13 @@ class ProductModelAdmin(admin.ModelAdmin):
 
     def increase_stock(self, request, queryset):
         for product in queryset:
-            product.stock_quantity += 1
+            product.stock += 1
             product.save()
 
     def decrease_stock(self, request, queryset):
         for product in queryset:
-            if product.stock_quantity > 0:
-                product.stock_quantity -= 1
+            if product.stock > 0:
+                product.stock -= 1
                 product.save()
 
 @admin.register(Category)
