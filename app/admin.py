@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Customer, Cart, Payment, OrderPlaced, Category
+from . models import Product, Customer, Cart, Payment, OrderPlaced, Category, Order
 from django.urls import reverse
 from django.utils.html import format_html
 # Register your models here.
@@ -45,3 +45,6 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
     list_display=['id', 'customer', 'product', 'quantity', 'ordered_date', 'status', 'payment']
 
 
+@admin.register(Order)
+class OrderModelAdmin(admin.ModelAdmin):
+    list_display=['customer', 'delivery_option', 'total_price', 'created_at']

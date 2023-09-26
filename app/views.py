@@ -2,9 +2,9 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.http import JsonResponse
-from . models import Product, Customer, Cart, Category
+from . models import Product, Customer, Cart, Category, Order
 from django.db.models import Count
-from . forms import CustomerRegistrationForm, CustomerProfileForm, Customer
+from . forms import CustomerRegistrationForm, CustomerProfileForm, Customer, LocationForm
 from django.contrib import messages
 from django.db.models import Q
 
@@ -189,17 +189,38 @@ def search(request):
     return render(request, 'app/search.html', locals())
 
 
-class checkout(View):
-    def get(self,request):
+def create_order(request):
+    if request.method == 'POST':
         user = request.user
         add=Customer.objects.filter(user=user)
         cart_items = Cart.objects.filter(user=user)
+        selected_products = [item.product for item in cart_items]
         famount = 0
         for p in cart_items:
             value = p.quantity * p.product.selling_price
             famount = famount + value
         totalamount = famount
-        return render(request, 'app/checkout.html', locals())
+
+        order = Order.objects.create(
+            customer = request.user,
+            delivery_option=request.POST.get('delivery_option'),
+            total_price=totalamount,
+        )
+
+        order.products.set(selected_products)
+        cart_items.delete()
+
+        return redirect('list_orders')
+    
+    cart_items=Cart.objects.filter(user=request.user)
+    return render(request, 'app/checkout.html', {'cart_items':cart_items})
+
+
+def list_orders(request):
+    # Retrieve orders for the current user
+    orders = Order.objects.filter(customer=request.user).order_by('-created_at')
+
+    return render(request, 'app/list_orders.html', {'orders': orders})
 
 
 

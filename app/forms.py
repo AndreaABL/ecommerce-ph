@@ -45,3 +45,6 @@ class CustomerProfileForm(forms.ModelForm):
             'zipcode':forms.TextInput(attrs={'class':'form-control'}),
         }
 
+
+class LocationForm(forms.Form):
+    address = forms.CharField(max_length=100, required=True, label='Dirección de envío' )

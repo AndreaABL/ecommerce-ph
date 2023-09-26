@@ -111,3 +111,9 @@ class OrderPlaced(models.Model):
     def total_cost(self):
         return self.quantity * self.product.selling_price
 
+class Order(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product)
+    delivery_option = models.CharField(max_length=50, choices=[('pickup', 'Pickup'), ('delivery', 'Delivery')])
+    total_price = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)

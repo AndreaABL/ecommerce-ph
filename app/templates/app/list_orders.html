@@ -1,0 +1,42 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Ordenes{% endblock title %}
+
+{% block main-content %}
+<h1>Order List</h1>
+
+<table border="1">
+    <thead class="table-active">
+        <tr >
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Delivery Option</th>
+            <th>Total Price</th>
+            
+            <th>Order Date</th>
+        </tr>
+    </thead>
+    <tbody class="table-success">
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.customer.username }}</td>
+                <td>{{ order.delivery_option }}</td>
+                <td>${{ order.total_price }}</td>
+
+                <td>{{ order.created_at|date:"F d, Y H:i:s" }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">No orders found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+    <div id="banner" class="section-m1" style="margin: 20px 0; display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
+        <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
+    </div>
+{% endblock %}
+

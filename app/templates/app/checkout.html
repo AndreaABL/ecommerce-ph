@@ -15,6 +15,7 @@
     <div class="col-sm-6">
         <h4>Detalles del pedido</h4>
         <br>
+        <form method="post">
         {% for item in cart_items  %}
         <div class="card mb-2">
             <div class="card-body">
@@ -30,76 +31,18 @@
         <small style="font-size:15px">El despacho de productos tiene un valor de $1472 x KM el que se agregará al monto total una vez calculada la distancia existente entre nuestra ubicación y la del cliente.</small>
     </div>
     <div class="col-sm-5 offset-sm-1" >
-        <br>
-        <div class="d-grid gap-2col-8 mx-auto">
-            <button class="btn btn-outline-success" type="button" onclick="mostrar()">Despacho a domicilio</button>
-            <br>
-            <button type="button" class="btn btn-outline-secondary" id="atras" onclick="atras()" style="display:none; --bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Atrás</button>
-            <div class="container" id="most" style="display:none;">
-                <br>
-                <h4>Calcular distancia de envío</h4>
-
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label for="from"></label>
-                        <input type="text" id="from" class="form-control" value="Callejon de Los Burros, La Huerta, Romeral" readonly onmousedown="return false;">
-                    </div>
-                    <div class="form-group">
-                        <label for="to"></label>
-                        <input type="text" id="to" placeholder="Destino" class="form-control pac-target-input" autocomplete="off">
-                    </div>
-                </form>
-                <br>
-                <div class="form-group">
-                    <button class="btn btn-success" id="calculate" onclick="calcRoute()">Ver distancia</button>
-                </div>
-
-                <div class="container-fluid" id="most">
-                    <div id="output" class="output" style="text-align:center; font-size:17px; margin:10px auto;">
-                    </div>
-
-                    <div id="totalcost" class="totalcost" style="text-align:center; font-size:17px; margin:10px auto;">
-                    </div>
-
-                    <div id="googleMap" style="width:80%; height:300px; margin:10px auto"></div>
-                </div>
-            </div>
-        <button class="btn btn-outline-success" id="ocul" type="button" onclick="ocultar()">Retiro en tienda</button>
-        <br>
-
-        <form id="form" action="https://formspree.io/f/meqwbvja" method="POST">
-
+        
             {% csrf_token %}
-            <input name="cliente" class="form-control" value={{request.user.username}} style="display:none;">
-
-            {% for item in cart_items  %}
-            <input name="titulo" class="form-control" value={{item.product.name}} style="display:none;">
-            <input name="cantidad" class="form-control" value={{item.quantity}} style="display:none;">
-            {% load humanize %}
-            <input name="precio" class="form-control" value={{item.product.selling_price|intcomma}}  style="display:none;">
-            {% endfor %}
-
-                <label  class="form-label" style="font-size:17px;"><i class="fa-solid fa-money-bill-1-wave fa-shake" style="color:green"></i>      <strong>Monto Total </strong></label>
-                {% load humanize %}
-                <input type="number" name="sinenvio" class="form-control" id="totalamount" onclick="ocultar()" value={{totalamount}} readonly style="display:none;">
-                {% load humanize %}
-                <input type="number" name="conenvio" class="form-control" id="totalamountt" onclick="calcRoute()" value={{totalamount}} readonly style="display:none;">
-                <br>
-                <label  class="form-label" style="font-size:15px; display:none;" id="correo"><i class="fa-solid fa-circle-info fa-beat-fade" style="color:green"></i>  <strong>Déjanos tus datos para ponernos en contacto contigo </strong>
-                    <br>
-
-                    <input type="text" name="nombre" placeholder="Nombre" class="form-control" >
-                    <br>
-                    <input type="email" name="correo" placeholder="Correo" class="form-control" >
-                    <br>
-                    <input type="number" name="contacto" placeholder="Número de contacto" class="form-control" >
-                </label>
-
-            <br><br>
-            <div class="text-end">
-                <button type="submit" class="btn btn-success" id="info" style="display:none;">Enviar información</button>
-            </div>
-
+            <label for="delivery_option">Delivery Option:</label>
+            <select name="delivery_option" id="delivery_option">
+                <option value="pickup">Pickup</option>
+                <option value="delivery">Delivery</option>
+            </select>
+            <br>
+      
+            <form action="/list_orders" class="d-inline">
+                <button type="submit" class="btn btn-success shadow py-2" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Generar orden</button>
+            </form>
         </form>
 
         </div>
@@ -115,7 +58,6 @@
 {% block payment-gateway %}
 
 {% endblock payment-gateway %}
-
 
 
 
