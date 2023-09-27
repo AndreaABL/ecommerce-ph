@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-^kvadg3tguk5umglz7r+x3n=7^ts+fo41h5w+gv@m7602qo%1-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['prohidraulicos.herokuapp.com']
 
 
 # Application definition
@@ -82,10 +83,10 @@ WSGI_APPLICATION = 'ecomph.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD':'100398',
-        'HOST':'localhost',
+        'NAME': 'dd2foce6oqku57',
+        'USER': 'mfvleqeokajvkm',
+        'PASSWORD':'d0864c629ff3fb72650dd19c7006889bb6676d2ec09dba58c966ae95620a29f3',
+        'HOST':'ec2-52-215-68-14.eu-west-1.compute.amazonaws.com',
         'PORT':'5432',
         
     }
@@ -132,6 +133,8 @@ MEDIA_ROOT = BASE_DIR/'media'
 LOGIN_REDIRECT_URL = '/'
 STATICFILES_DIR = [ os.path.join(BASE_DIR, 'static'),
                     'app/css/style.css']
+
+django_heroku.settings(locals())
 
 
 # Default primary key field type
