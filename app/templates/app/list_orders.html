@@ -35,7 +35,7 @@
                                 <td class="align-middle text-center">{{ order.created_at|date:"F d, Y H:i:s" }}</td>
                                 <td class="align-middle text-center">{{ order.status }}</td>
                                 {% if order.pdf_file %}
-                                <td class="align-middle text-center"><a href="{{ order.pdf_file.url }}" target="_blank">Ver/Descargar</a></td>
+                                <td class="align-middle text-center"><a href="{{ order.pdf_file.url }}" target="_blank" style="text-decoration:none; color:black"><strong>Ver/Descargar</strong></a></td>
                                 {% endif %}
                             </tr>
                             {% empty %}
