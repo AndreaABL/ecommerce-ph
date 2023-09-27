@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Product, Customer, Cart, Payment, OrderPlaced, Category, Order
+from . models import Product, Customer, Cart, Category, Order
 from django.urls import reverse
 from django.utils.html import format_html
 from .signals import order_status_changed
@@ -38,13 +38,6 @@ class CartModelAdmin(admin.ModelAdmin):
         link = reverse("admin:app_product_change", args=[obj.product.pk])
         return format_html('<a href="{}">{}</a>', link, obj.product.title)
 
-@admin.register(Payment)
-class PaymentModelAdmin(admin.ModelAdmin):
-    list_display=['id', 'user', 'amount', 'mercadopago_order_id', 'mercadopago_payment_status', 'mercadopago_payment_id', 'paid']
-
-@admin.register(OrderPlaced)
-class OrderPlacedModelAdmin(admin.ModelAdmin):
-    list_display=['id', 'customer', 'product', 'quantity', 'ordered_date', 'status', 'payment']
 
 
 def change_order_status_and_notify_customer(modeladmin, request, queryset):

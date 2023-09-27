@@ -77,39 +77,6 @@ class Cart(models.Model):
         return self.quantity * self.product.selling_price
 
 
-STATUS_CHOICES = (
-    ('Aceptado', 'Aceptado'),
-    ('Empacado', 'Empacado'),
-    ('En camino', 'En camino'),
-    ('Enviado', 'Enviado'),
-    ('Cancelado', 'Cancelado'),
-    ('Pendiente', 'Pendiente'),
-)
-
-class Payment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.FloatField()
-    mercadopago_order_id = models.CharField(max_length=100, blank=True, null=True)
-    mercadopago_payment_status = models.CharField(max_length=100, blank=True, null=True)
-    mercadopago_payment_id = models.CharField(max_length=100, blank=True, null=True)
-    paid = models.BooleanField(default=False)
-
-    @property
-    def __str__(self):
-        return self.description
-
-class OrderPlaced(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-    ordered_date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pendiente')
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE, default="")
-
-    @property
-    def total_cost(self):
-        return self.quantity * self.product.selling_price
 
 STATUS_CHOICES = (
     ('Cotización enviada', 'Cotización enviada'),
