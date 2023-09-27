@@ -4,7 +4,7 @@ from django.views import View
 from django.http import JsonResponse
 from . models import Product, Customer, Cart, Category, Order
 from django.db.models import Count
-from . forms import CustomerRegistrationForm, CustomerProfileForm, Customer, LocationForm
+from . forms import CustomerRegistrationForm, CustomerProfileForm, Customer
 from django.contrib import messages
 from django.db.models import Q
 
@@ -190,7 +190,10 @@ def search(request):
 
 
 def create_order(request):
+
     if request.method == 'POST':
+        delivery_option = request.POST.get('delivery_option')
+        address = request.POST.get('address')
         user = request.user
         add=Customer.objects.filter(user=user)
         cart_items = Cart.objects.filter(user=user)
@@ -201,11 +204,20 @@ def create_order(request):
             famount = famount + value
         totalamount = famount
 
-        order = Order.objects.create(
-            customer = request.user,
-            delivery_option=request.POST.get('delivery_option'),
-            total_price=totalamount,
-        )
+        if delivery_option == 'delivery' and address:
+            order = Order.objects.create(
+                customer = request.user,
+                delivery_option=request.POST.get('delivery_option'),
+                address = address,
+                total_price=totalamount,
+            )
+        elif delivery_option == 'pickup':
+            order = Order.objects.create(
+                customer = request.user,
+                delivery_option=request.POST.get('delivery_option'),
+                total_price=totalamount,
+            )
+        
 
         order.products.set(selected_products)
         cart_items.delete()
@@ -219,7 +231,6 @@ def create_order(request):
 def list_orders(request):
     # Retrieve orders for the current user
     orders = Order.objects.filter(customer=request.user).order_by('-created_at')
-
     return render(request, 'app/list_orders.html', {'orders': orders})
 
 

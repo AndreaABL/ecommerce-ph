@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm, SetPasswordForm, PasswordResetForm
 from django.contrib.auth.models import User
-from . models import Customer
+from . models import Customer, Order
 
 class LoginForm(AuthenticationForm):
     username = UsernameField(label='Usuario', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
@@ -45,6 +45,3 @@ class CustomerProfileForm(forms.ModelForm):
             'zipcode':forms.TextInput(attrs={'class':'form-control'}),
         }
 
-
-class LocationForm(forms.Form):
-    address = forms.CharField(max_length=100, required=True, label='Dirección de envío' )

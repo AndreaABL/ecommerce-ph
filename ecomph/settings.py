@@ -129,7 +129,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
-LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_REDIRECT_URL = '/'
 STATICFILES_DIR = [ os.path.join(BASE_DIR, 'static'),
                     'app/css/style.css']
 
@@ -148,4 +148,6 @@ EMAIL_HOST_USER = 'practicaproyectoshidraulicos@gmail.com'
 EMAIL_HOST_PASSWORD = 'vmagqkpyojkcttxr'
 
 
-
+ADMINS = [
+    ('andreaa', 'practicaproyectoshidraulicos@gmail.com'),
+]

@@ -33,12 +33,20 @@
     <div class="col-sm-5 offset-sm-1" >
         
             {% csrf_token %}
-            <label for="delivery_option">Delivery Option:</label>
-            <select name="delivery_option" id="delivery_option">
-                <option value="pickup">Pickup</option>
-                <option value="delivery">Delivery</option>
+            <br><br><br>
+            <select class="form-select" name="delivery_option" id="delivery_option" aria-label=".form-select-lg example">
+                <option selected>Elija la opción que más le acomode</option>
+                <option value="pickup">Retiro en tienda</option>
+                <option value="delivery">Despacho a domicilio</option>
+
             </select>
-            <br>
+
+            <br><br>
+            <div id="location_field" style="display: none;">
+
+                <input type="text" class="form-control" name="address" id="address" placeholder="Ingrese su ubicación exacta">
+            </div>
+            <br><br>
       
             <form action="/list_orders" class="d-inline">
                 <button type="submit" class="btn btn-success shadow py-2" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Generar orden</button>

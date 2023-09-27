@@ -111,9 +111,23 @@ class OrderPlaced(models.Model):
     def total_cost(self):
         return self.quantity * self.product.selling_price
 
+STATUS_CHOICES = (
+    ('Cotización enviada', 'Cotización enviada'),
+    ('Cotización pendiente', 'Cotización pendiente'),
+)
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
     delivery_option = models.CharField(max_length=50, choices=[('pickup', 'Pickup'), ('delivery', 'Delivery')])
     total_price = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pendiente')
+    status_changed = models.BooleanField(default=False)
+    address = models.CharField( max_length=200, default='Store Pickup')
+
+    def set_status(self, new_status):
+        if self.status != new_status:
+            self.status = new_status
+            self.status_changed = True
+            self.save()
+
