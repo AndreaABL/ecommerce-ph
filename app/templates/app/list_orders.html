@@ -23,6 +23,7 @@
                                 <th class="align-middle text-center">Monto Total</th>
                                 <th class="align-middle text-center">Fecha</th>
                                 <th class="align-middle text-center">Estado</th>
+                                <th class="align-middle text-center">Cotización</th>
                             </tr>
                         </thead>
                         <tbody >
@@ -33,6 +34,9 @@
                                 <td class="align-middle text-center">${{ order.total_price }}</td>
                                 <td class="align-middle text-center">{{ order.created_at|date:"F d, Y H:i:s" }}</td>
                                 <td class="align-middle text-center">{{ order.status }}</td>
+                                {% if order.pdf_file %}
+                                <td class="align-middle text-center"><a href="{{ order.pdf_file.url }}" target="_blank">Ver/Descargar</a></td>
+                                {% endif %}
                             </tr>
                             {% empty %}
                             <tr>

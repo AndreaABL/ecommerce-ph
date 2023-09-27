@@ -55,15 +55,23 @@ def change_order_status_and_notify_customer(modeladmin, request, queryset):
 
         order_status_changed.send(sender=Order, order=order, new_status=new_status)
         subject = f'El estado de la orden ha cambiado: Order ID {order.id}'
-        message = f'Su orden (Order ID: {order.id}) ha cambiado de estado a {new_status}'
+        message = f'Su orden (Order ID: {order.id}) ha cambiado de estado a {new_status}, revise aqui: http://127.0.0.1/orders/'
         from_email = 'practicaproyectoshidraulicos@gmail.com'
         recipient_list = [order.customer.email]
         send_mail(subject, message, from_email, recipient_list, fail_silently=True)
 change_order_status_and_notify_customer.short_description = 'Cambio en el estado de la orden'
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'customer', 'status']
+    list_display = ['id', 'customer', 'status', 'pdf_file']
     actions = [change_order_status_and_notify_customer]
+
+    def pdf_file(self, obj):
+        if obj.pdf_file:
+            return '<a href="%s" target="_blank">View / Download PDF</a>' % obj.pdf_file.url
+        else:
+            return 'No PDF'
+    pdf_file.short_description = 'PDF File'
+    pdf_file.allow_tags = True
 
 admin.site.register(Order, OrderAdmin)
 

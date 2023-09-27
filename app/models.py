@@ -123,6 +123,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Correo pendiente')
     address = models.CharField( max_length=200, default='Store Pickup')
+    pdf_file = models.FileField(upload_to='order_pdfs/', null=True, blank=True)
 
 
 
