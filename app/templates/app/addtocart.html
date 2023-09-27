@@ -1,12 +1,12 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block title %}Carro de compras{% endblock title %}
+{% block title %}Productos a cotizar{% endblock title %}
 
 {% block main-content %}
 <div class="container my-5">
     <div class="row">
         {% if cart %}
-            <h1 class="text-center mb-5"><strong>Carro de compras</strong></h1>
+            <h1 class="text-center mb-5"><strong>Productos a cotizar</strong></h1>
             <div class="col-sm-8">
                 <div class="card">
                     <div class="card-body">
@@ -48,7 +48,7 @@
 
                             <li class="list-group-item d-flex justify-content-between align-items-center boder-0 px-0 mb-3">
                                 <div>
-                                    <strong>Total a pagar</strong>
+                                    <strong>Total</strong>
                                 </div>
                                 {% load humanize %}
                                 <span id="totalamount"><strong>${{totalamount|intcomma}}</strong></span>
@@ -63,7 +63,7 @@
             </div>
 
             {% else %}
-                <h1 class="text-center mb-5">El carro está vacío</h1>
+                <h3 class="text-center mb-5">No haz seleccionado ningún producto</h3>
         {% endif %}
     </div>
 </div>

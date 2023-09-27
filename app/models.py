@@ -118,16 +118,11 @@ STATUS_CHOICES = (
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
-    delivery_option = models.CharField(max_length=50, choices=[('pickup', 'Pickup'), ('delivery', 'Delivery')])
+    delivery_option = models.CharField(max_length=50, choices=[('retiro', 'Pickup'), ('despacho', 'Delivery')])
     total_price = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pendiente')
-    status_changed = models.BooleanField(default=False)
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Correo pendiente')
     address = models.CharField( max_length=200, default='Store Pickup')
 
-    def set_status(self, new_status):
-        if self.status != new_status:
-            self.status = new_status
-            self.status_changed = True
-            self.save()
+
 

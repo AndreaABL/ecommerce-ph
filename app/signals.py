@@ -1,10 +1,10 @@
 from django.db.models.signals import post_save
-from django.dispatch import receiver
-import django.dispatch
+from django.dispatch import receiver, Signal
+from django.db.models.signals import post_save
 from .models import Order
 from django.core.mail import send_mail
 
-
+order_status_changed = Signal()
 
 @receiver(post_save, sender=Order)
 def order_created_alert(sender, instance, created, **kwargs):

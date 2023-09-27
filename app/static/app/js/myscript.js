@@ -55,7 +55,7 @@ $('.remove-cart').click(function(){
 
 document.getElementById('delivery_option').addEventListener('change', function() {
     var locationField = document.getElementById('location_field');
-    if (this.value === 'delivery') {
+    if (this.value === 'despacho') {
         locationField.style.display = 'block';
     } else {
         locationField.style.display = 'none';

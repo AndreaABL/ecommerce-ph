@@ -2,8 +2,8 @@ from django.contrib import admin
 from . models import Product, Customer, Cart, Payment, OrderPlaced, Category, Order
 from django.urls import reverse
 from django.utils.html import format_html
-
-
+from .signals import order_status_changed
+from django.core.mail import send_mail
 # Register your models here.
 
 @admin.register(Product)
@@ -47,10 +47,25 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
     list_display=['id', 'customer', 'product', 'quantity', 'ordered_date', 'status', 'payment']
 
 
-@admin.register(Order)
-class OrderModelAdmin(admin.ModelAdmin):
-    list_display=['customer', 'delivery_option', 'total_price', 'created_at']
+def change_order_status_and_notify_customer(modeladmin, request, queryset):
+    for order in queryset:
+        new_status = 'Cotización enviada'
+        order.status = new_status
+        order.save()
 
+        order_status_changed.send(sender=Order, order=order, new_status=new_status)
+        subject = f'El estado de la orden ha cambiado: Order ID {order.id}'
+        message = f'Su orden (Order ID: {order.id}) ha cambiado de estado a {new_status}'
+        from_email = 'practicaproyectoshidraulicos@gmail.com'
+        recipient_list = [order.customer.email]
+        send_mail(subject, message, from_email, recipient_list, fail_silently=True)
+change_order_status_and_notify_customer.short_description = 'Cambio en el estado de la orden'
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['id', 'customer', 'status']
+    actions = [change_order_status_and_notify_customer]
+
+admin.site.register(Order, OrderAdmin)
 
 
 

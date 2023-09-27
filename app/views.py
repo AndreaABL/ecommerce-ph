@@ -204,14 +204,14 @@ def create_order(request):
             famount = famount + value
         totalamount = famount
 
-        if delivery_option == 'delivery' and address:
+        if delivery_option == 'despacho' and address:
             order = Order.objects.create(
                 customer = request.user,
                 delivery_option=request.POST.get('delivery_option'),
                 address = address,
                 total_price=totalamount,
             )
-        elif delivery_option == 'pickup':
+        elif delivery_option == 'retiro':
             order = Order.objects.create(
                 customer = request.user,
                 delivery_option=request.POST.get('delivery_option'),
@@ -232,7 +232,6 @@ def list_orders(request):
     # Retrieve orders for the current user
     orders = Order.objects.filter(customer=request.user).order_by('-created_at')
     return render(request, 'app/list_orders.html', {'orders': orders})
-
 
 
 
