@@ -11,14 +11,13 @@
             <h3 style="font-family:Signika Negative" class="text-center">Cotizaciones <i class="fa-solid fa-pen" ></i></h3>
             <h6 style="text-align: center"><span class="text-capitalize">{{request.user}}</span>, aquí podrás ver las cotizaciones que haz solicitado</h6>
             <br>
-            <div class="card">
-                <div class="card-body">
+            
                     
-                    
-                    <table class="table table-striped">
-                        <thead>
-                            <tr class="table-success" >
-                                <th class="align-middle text-center">ID</th>
+                <div class="table-responsive" style="border-spacing: 10px 5px">  
+                    <table class="table table-striped table-bordered table-hover"  >
+                        <thead >
+                            <tr >
+                                <th class="align-middle text-center " >ID</th>
                                 <th class="align-middle text-center">Método de entrega</th>
                                 <th class="align-middle text-center">Monto Total</th>
                                 <th class="align-middle text-center">Fecha</th>
@@ -26,7 +25,7 @@
                                 <th class="align-middle text-center">Cotización</th>
                             </tr>
                         </thead>
-                        <tbody >
+                        <tbody class="table-group-divider">
                             {% for order in orders %}
                             <tr class="table-hover">
                                 <td class="align-middle text-center">{{ order.id }}</td>
@@ -46,7 +45,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>    
         </div>
     </div>
 </div>

@@ -130,6 +130,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
 LOGIN_REDIRECT_URL = '/'
+REGISTER_REDIRECT_URL = '/login'
 STATICFILES_DIR = [ os.path.join(BASE_DIR, 'static'),
                     'app/css/style.css']
 
