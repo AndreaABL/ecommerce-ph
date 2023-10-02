@@ -52,6 +52,7 @@ class CustomerRegistrationView(View):
         if form.is_valid():
             form.save()
             messages.success(request, "Bienvenido!, Usuario registrado con éxito")
+            return redirect('login')
         else:
             messages.warning(request, "Datos inválidos")
         return render(request, 'app/customerregistration.html', locals())
