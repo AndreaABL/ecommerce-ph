@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-^kvadg3tguk5umglz7r+x3n=7^ts+fo41h5w+gv@m7602qo%1-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['proyectoshidraulicos.pythonanywhere.com']
 
 
 # Application definition
@@ -81,13 +81,9 @@ WSGI_APPLICATION = 'ecomph.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD':'100398',
-        'HOST':'localhost',
-        'PORT':'5432',
-        
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+
     }
 }
 
@@ -125,7 +121,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = '/home/proyectoshidraulicos/ecommerce-ph/app/static/app'
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'

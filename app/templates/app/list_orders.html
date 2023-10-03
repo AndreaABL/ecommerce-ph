@@ -5,54 +5,57 @@
 
 {% block main-content %}
 
-<div class="container">
+<div class="container mt-3 py-4">
     <div class="row my-3">
         <div class="col-sm-6 offset-sm-3">
-            <br>
             <h3 style="font-family:Signika Negative" class="text-center">Cotizaciones <i class="fa-solid fa-pen" ></i></h3>
             <h6 style="text-align: center"><span class="text-capitalize">{{request.user}}</span>, aquí podrás ver las cotizaciones que haz solicitado</h6>
             <br>
-            
+
         </div>
     </div>
-    <div class="table-responsive" style="border-spacing: 10px 5px; display:flex; align-items:center; justify-content:center">  
-        <table class="table table-striped table-bordered table-hover" style="width: 90%" >
-            <thead >
-                <tr>
-                    <th class="align-middle text-center">ID</th>
-                    <th class="align-middle text-center" >Método de entrega</th>
-                    <th class="align-middle text-center" >Monto Total</th>
-                    <th class="align-middle text-center" >Fecha</th>
-                    <th class="align-middle text-center" >Estado</th>
-                    <th class="align-middle text-center" >Cotización</th>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-light">
+                <tr class="align-middle text-center">
+                    <th>Método de entrega</th>
+                    <th>Monto Total</thss=>
+                    <th>Fecha</thclass=>
+                    <th>Estado</thclass=>
+                    <th>Cotización</thlass=>
                 </tr>
+
             </thead>
             <tbody class="table-group-divider" >
                 {% for order in orders %}
-                <tr class="table-hover">
-                    <td class="align-middle text-center">{{ order.id }}</td>
-                    <td class="align-middle text-center">{{ order.delivery_option }}</td>
-                    
-                    <td class="align-middle text-center">${{ order.total_price }}</td>
-                    <td class="align-middle text-center">{{ order.created_at|date:"F d, Y H:i:s" }}</td>
-                    <td class="align-middle text-center">{{ order.status }}</td>
-                    {% if order.pdf_file %}
-                    <td class="align-middle text-center"><a href="{{ order.pdf_file.url }}" target="_blank" style="text-decoration:none; color:black"><strong>Ver/Descargar</strong></a></td>
-                    {% endif %}
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="6">No haz solicitado ninguna cotización</td>
-                </tr>
-                {% endfor %}
+                    <tr class="align-middle text-center">
+                        <td >{{ order.delivery_option }}</td>
+                        <td>${{ order.total_price }}</td>
+                        <td>{{ order.created_at|date:"F d, Y H:i:s" }}</tdss=>
+                        <td>{{ order.status }}</td=>
+                        {% if order.pdf_file %}
+                        <td><a href="{{ order.pdf_file.url }}" target="_blank" style="text-decoration:none; color:black"><strong>Ver/Descargar</strong></a></td>
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6">No haz solicitado ninguna cotización</td>
+                    </tr>
+                    {% endfor %}
             </tbody>
         </table>
+    </div>
+
+    <br>
+    <div class="row container">
+        <small style="font-size:17px; color:red"><strong>IMPORTANTE: </strong> </small>
+        <small style="font-size:15px; text-align:justify">El despacho de productos tiene un valor de $1472 x KM el que se agregará al monto total una vez calculada la distancia existente entre nuestra ubicación y la de usted</small>
     </div>
 </div>
 
 
-    <div id="banner" class="section-m1" style="margin: 20px 0; display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
-        <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
-    </div>
+<div id="banner" class="section-m1" style="margin: 20px 0; display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
+    <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
+</div>
 {% endblock %}
 

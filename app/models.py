@@ -85,6 +85,7 @@ STATUS_CHOICES = (
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
+    quantity = models.PositiveIntegerField(default=1)
     delivery_option = models.CharField(max_length=50, choices=[('retiro', 'Pickup'), ('despacho', 'Delivery')])
     total_price = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
