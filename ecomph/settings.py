@@ -125,7 +125,7 @@ STATIC_ROOT = '/home/proyectoshidraulicos/ecommerce-ph/app/static/app'
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/profile/'
 REGISTER_REDIRECT_URL = '/login'
 STATICFILES_DIR = [ os.path.join(BASE_DIR, 'static'),
                     'app/css/style.css']
