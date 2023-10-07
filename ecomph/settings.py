@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-^kvadg3tguk5umglz7r+x3n=7^ts+fo41h5w+gv@m7602qo%1-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['proyectoshidraulicos.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -148,3 +148,5 @@ EMAIL_HOST_PASSWORD = 'vmagqkpyojkcttxr'
 ADMINS = [
     ('andreaa', 'practicaproyectoshidraulicos@gmail.com'),
 ]
+
+AUTH_USER_MODEL = 'app.customuser'

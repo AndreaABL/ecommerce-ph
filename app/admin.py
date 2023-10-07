@@ -1,11 +1,15 @@
 from django.contrib import admin
-from . models import Product, Customer, Cart, Category, Order
+from . models import Product, Customer, Cart, Category, Order, CustomUser
 from django.urls import reverse
 from django.utils.html import format_html
 from .signals import order_status_changed
 from django.core.mail import send_mail
 # Register your models here.
 
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = ('email', 'first_name', 'last_name', 'state','locality','city','mobile','is_active', 'is_staff')
+
+admin.site.register(CustomUser, CustomUserAdmin)
 @admin.register(Product)
 class ProductModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'description', 'category', 'product_image', 'stock']
@@ -50,12 +54,12 @@ def change_order_status_and_notify_customer(modeladmin, request, queryset):
         subject = f'El estado de la orden ha cambiado: Order ID {order.id}'
         message = f'Su orden (Order ID: {order.id}) ha cambiado de estado a {new_status}, revise aqui: http://proyectoshidraulicos.pythonanywhere.com/orders/'
         from_email = 'practicaproyectoshidraulicos@gmail.com'
-        recipient_list = [order.customer.email]
+        recipient_list = [order.user.email]
         send_mail(subject, message, from_email, recipient_list, fail_silently=True)
 change_order_status_and_notify_customer.short_description = 'Cambio en el estado de la orden'
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'customer', 'status', 'pdf_file']
+    list_display = ['id', 'user', 'status', 'pdf_file']
     actions = [change_order_status_and_notify_customer]
 
     def pdf_file(self, obj):

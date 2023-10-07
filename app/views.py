@@ -1,10 +1,11 @@
 
 from django.shortcuts import render, redirect
+from django.contrib.auth import login
 from django.views import View
 from django.http import JsonResponse
-from . models import Product, Customer, Cart, Category, Order
+from . models import Product, Customer, Cart, Category, Order, CustomUser
 from django.db.models import Count
-from . forms import CustomerRegistrationForm, CustomerProfileForm, Customer
+from . forms import CustomerRegistrationForm, CustomerProfileForm, Customer, LoginForm
 from django.contrib import messages
 from django.db.models import Q
 
@@ -41,6 +42,7 @@ class ProductDetail(View):
         item_product =Product.objects.filter(item=1)
 
         return render(request, "app/productdetail.html", locals())
+
 
 class CustomerRegistrationView(View):
     def get(self,request):
@@ -196,7 +198,6 @@ def create_order(request):
         delivery_option = request.POST.get('delivery_option')
         address = request.POST.get('address')
         user = request.user
-        add=Customer.objects.filter(user=user)
         cart_items = Cart.objects.filter(user=user)
         selected_products = [item.product for item in cart_items]
         famount = 0
@@ -207,14 +208,14 @@ def create_order(request):
 
         if delivery_option == 'despacho' and address:
             order = Order.objects.create(
-                customer = request.user,
+                user = request.user,
                 delivery_option=request.POST.get('delivery_option'),
                 address = address,
                 total_price=totalamount,
             )
         elif delivery_option == 'retiro':
             order = Order.objects.create(
-                customer = request.user,
+                user = request.user,
                 delivery_option=request.POST.get('delivery_option'),
                 total_price=totalamount,
             )
@@ -231,7 +232,7 @@ def create_order(request):
 
 def list_orders(request):
     # Retrieve orders for the current user
-    orders = Order.objects.filter(customer=request.user).order_by('-created_at')
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'app/list_orders.html', {'orders': orders})
 
 

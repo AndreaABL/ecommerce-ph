@@ -73,7 +73,7 @@
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-              > <span class="text-capitalize"><i class="fa-solid fa-user"></i>   {{request.user}}</span></a>
+              > <span class="text-capitalize"><i class="fa-solid fa-user"></i>   {{request.first_name}}</span></a>
               <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                 <li><a class="dropdown-item " href="{% url 'profile' %}">Perfil</a></li>
                 <li><a class="dropdown-item " href="{% url 'list_orders' %}">Cotizaciones</a></li>

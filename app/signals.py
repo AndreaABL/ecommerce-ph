@@ -14,6 +14,6 @@ def order_created_alert(sender, instance, created, **kwargs):
         from django.core.mail import mail_admins
         mail_admins(
             'Nueva orden creada',
-            f'Order ID: {instance.id} has been created by {instance.customer.username}.',
+            f'Order ID: {instance.id} has been created by {instance.user}.',
         )
 
