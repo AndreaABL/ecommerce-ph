@@ -54,7 +54,7 @@ def change_order_status_and_notify_customer(modeladmin, request, queryset):
 
         order_status_changed.send(sender=Order, order=order, new_status=new_status)
         subject = f'El estado de la orden ha cambiado: Order ID {order.id}'
-        message = f'Su orden (Order ID: {order.id}) ha cambiado de estado a {new_status}, revise aqui: http://proyectoshidraulicos.pythonanywhere.com/orders/'
+        message = f'Su orden (Order ID: {order.id}) ha cambiado de estado a {new_status}'
         from_email = 'practicaproyectoshidraulicos@gmail.com'
         recipient_list = [order.user.email]
         send_mail(subject, message, from_email, recipient_list, fail_silently=True)

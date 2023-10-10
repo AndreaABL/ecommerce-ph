@@ -84,6 +84,7 @@ def update_profile(request):
     }
     return render(request, 'app/address.html', context)
 
+@login_required
 def add_to_cart(request):
     user=request.user
     product_id=request.GET.get('prod_id')
@@ -92,6 +93,7 @@ def add_to_cart(request):
     return redirect('/cart')
 
 
+@login_required
 def show_cart(request):
     user = request.user
     cart = Cart.objects.filter(user=user)
@@ -102,7 +104,7 @@ def show_cart(request):
     totalamount = amount
     return render(request, 'app/addtocart.html', locals())
 
-
+@login_required
 def plus_cart(request):
     if request.method == 'GET':
         prod_id = request.GET['prod_id']
@@ -123,6 +125,7 @@ def plus_cart(request):
         }
         return JsonResponse(data)
 
+@login_required
 def minus_cart(request):
     if request.method == 'GET':
         prod_id = request.GET['prod_id']
@@ -143,6 +146,7 @@ def minus_cart(request):
         }
         return JsonResponse(data)
 
+@login_required
 def remove_cart(request):
     if request.method == 'GET':
         prod_id=request.GET['prod_id']
@@ -167,7 +171,7 @@ def search(request):
     product = Product.objects.filter(Q(name__icontains=query))
     return render(request, 'app/search.html', locals())
 
-
+@login_required
 def create_order(request):
 
     if request.method == 'POST':
@@ -195,9 +199,12 @@ def create_order(request):
                 delivery_option=request.POST.get('delivery_option'),
                 total_price=totalamount,
             )
-          
-        
-        OrderItem.objects.create(order=order, product=p.product, quantity=p.quantity)
+        for cart_item in cart_items:
+            OrderItem.objects.create(
+                order = order, 
+                product = cart_item.product, 
+                quantity = cart_item.quantity,
+            )
         order.products.set(selected_products)
         cart_items.delete()
 
@@ -206,7 +213,7 @@ def create_order(request):
     cart_items=Cart.objects.filter(user=request.user)
     return render(request, 'app/checkout.html', {'cart_items':cart_items})
 
-
+@login_required
 def list_orders(request):
     # Retrieve orders for the current user
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
