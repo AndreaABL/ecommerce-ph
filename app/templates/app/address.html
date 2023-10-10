@@ -1,38 +1,26 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block title %}Dirección{% endblock title %}
+{% block title %}Actualizar datos{% endblock title %}
 
 {% block main-content %}
 <div class="container my-5">
     <div class="row">
-        <h3 style="font-family:Signika Negative">Bienvenido/a <span class="text-capitalize">{{request.user}}</span></h3>
+        <h3 style="font-family:Signika Negative; text-align: center">Bienvenido/a <span class="text-capitalize">{{user.first_name}}</span> <i class="fa-sharp fa-regular fa-face-smile" style="color: #19671e;"></i></h3>
     </div>
     <div class="col-sm-2 border-end">
         <ul class="list-unstyled">
-            <li class="d-grid" ><a href="{% url 'profile' %}" class="btn" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Perfil</a></li>
-            <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-success" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Dirección</a></li>
+            <li class="d-grid" ><a href="{% url 'profile' %}" class="btn" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Mis datos</a></li>
+            <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-success" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Actualizar datos</a></li>
         </ul>
     </div>
 
     <div class="col-sm-8 offset-sm-2">
         <div class="row">
-            {% for ad in add  %}
-            <div class="col-sm-6">
-                <div class="card m-2">
-                    <div class="card-body">
-                        <h3 style="font-family:Signika Negative">Información </h3>
-                        <p style="font-family:Signika Negative" >Nombre: {{ad.name}}</p>
-                        <p style="font-family:Signika Negative" >Comuna: {{ad.locality}}</p>
-                        <p style="font-family:Signika Negative" >Teléfono: {{ad.mobile}}</p>
-                        <p style="font-family:Signika Negative" >Ciudad: {{ad.city}}</p>
-                        <p style="font-family:Signika Negative" >Región: {{ad.state}}</p>
-                        <p style="font-family:Signika Negative" >Dirección: {{ad.zipcode}}</p>
-                        <p class="text-center"><a href="{% url 'updateAddress' pk=ad.id %}" type="button" class="btn btn-success" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Actualizar</a></p>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-success nt-5" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px" value="Guardar cambios">
+            </form>
         </div>
     </div>
 </div>

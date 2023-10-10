@@ -5,40 +5,40 @@
 {% block main-content %}
 <div class="container my-5">
     <div class="row">
-        <h3 style="font-family:Signika Negative; text-align: center">Bienvenido/a <span class="text-capitalize">{{request.first_name}}</span></h3>
-        <h5 style="text-align: center">Porfavor ingresa tus datos para entregarte una mejor atención <i class="fa-sharp fa-regular fa-face-smile" style="color: #19671e;"></i></h5>
+        <h3 style="font-family:Signika Negative; text-align: center">Bienvenido/a <span class="text-capitalize">{{custom_user.first_name}}</span> <i class="fa-sharp fa-regular fa-face-smile" style="color: #19671e;"></i></h3>
     </div>
     <br>
     <div class="col-sm-2 border-end">
         <ul class="list-unstyled" >
-            <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-success" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Perfil</a></li>
-            <li class="d-grid"><a href="{% url 'address' %}" class="btn" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Dirección</a></li>
+            <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-success" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Mis datos</a></li>
+            <li class="d-grid"><a href="{% url 'address' %}" class="btn" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Actualizar datos</a></li>
         </ul>
     </div>
-    <div class="col-sm-8 offset-sm-2">
-        <form action="" method="post" style="font-family:Signika Negative">
-            {% csrf_token %}
-            {% for fm in form  %}
-                {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small> <br>
-            {% endfor %}
-            <div class="col-12 mt-3">
-                <button type="submit" class="btn btn-success" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Enviar</button>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-light">
+                <tr class="align-middle text-center">
+                    <th>Nombre</th>
+                    <th>Apellido</thss=>
+                    <th>Región</thclass=>
+                    <th>Ciudad</thclass=>
+                    <th>Comuna</thlass=>
+                    <th>Contacto</thlass=>
+                </tr>
 
-            </div>
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors  %}
-                    <p class="alert alert-danger my-3">{{error}}</p>
-                {% endfor %}
-            {% endif %}
+            </thead>
+            <tbody class="table-group-divider" >
+                    <tr class="align-middle text-center">
+                        <td >{{ custom_user.first_name }}</td>
+                        <td>{{ custom_user.last_name }}</td>
+                        <td>{{ custom_user.state }}</tdss=>
+                        <td>{{ custom_user.locality}}</td=>
+                        <td>{{ custom_user.city }}</td=>
+                        <td>{{ custom_user.mobile}}</td=>
 
-            {% if messages %}
-                {% for msg in messages  %}
-                    <div class="alert alert-{{msg.tags}}" role="alert">
-                        {{msg}}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </form>
+                    </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <div id="banner" class="section-m1" style="margin: 20px 0; display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">

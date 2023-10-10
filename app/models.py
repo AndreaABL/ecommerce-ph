@@ -121,8 +121,7 @@ STATUS_CHOICES = (
 )
 class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product)
-    quantity = models.PositiveIntegerField(default=1)
+    products = models.ManyToManyField(Product, through='OrderItem')
     delivery_option = models.CharField(max_length=50, choices=[('retiro', 'Pickup'), ('despacho', 'Delivery')])
     total_price = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -130,3 +129,11 @@ class Order(models.Model):
     address = models.CharField( max_length=200, default='Store Pickup')
     pdf_file = models.FileField(upload_to='order_pdfs/', null=True, blank=True)
 
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.name}"

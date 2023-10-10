@@ -1,9 +1,10 @@
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.http import JsonResponse
-from . models import Product, Customer, Cart, Category, Order, CustomUser
+from . models import Product, Customer, Cart, Category, Order, CustomUser, OrderItem
 from django.db.models import Count
 from . forms import CustomerRegistrationForm, CustomerProfileForm, Customer, LoginForm
 from django.contrib import messages
@@ -59,54 +60,29 @@ class CustomerRegistrationView(View):
             messages.warning(request, "Datos inválidos")
         return render(request, 'app/customerregistration.html', locals())
 
-class ProfileView(View):
-    def get(self, request):
-        form = CustomerProfileForm()
-        return render(request, 'app/profile.html', locals())
+@login_required
+def user_profile(request):
+    custom_user = request.user
+    context = {
+        'custom_user' : custom_user,
+    }
 
-    def post(self, request):
-        form = CustomerProfileForm(request.POST)
+    return render(request, 'app/profile.html', context)
+
+@login_required
+def update_profile(request):
+    user = request.user
+    if request.method == 'POST':
+        form = CustomerProfileForm(request.POST, instance=user)
         if form.is_valid():
-            user = request.user
-            name = form.cleaned_data['name']
-            locality = form.cleaned_data['locality']
-            city = form.cleaned_data['city']
-            mobile = form.cleaned_data['mobile']
-            state = form.cleaned_data['state']
-            zipcode = form.cleaned_data['zipcode']
-
-            reg = Customer(user=user, name=name, locality=locality, mobile=mobile, city=city, state=state, zipcode=zipcode)
-            reg.save()
-            messages.success(request, "¡Felicidades! Datos guardados satisfactoriamente")
-        else:
-            messages.warning(request, "Datos inválidos")
-
-        return render(request, 'app/profile.html', locals())
-
-def address(request):
-    add = Customer.objects.filter(user=request.user)
-    return render(request, 'app/address.html', locals())
-
-class updateAddress(View):
-    def get(self,request,pk):
-        add = Customer.objects.get(pk=pk)
+            form.save()
+            return redirect(user_profile)
+    else:
         form = CustomerProfileForm()
-        return render(request, 'app/updateAddress.html', locals())
-    def post(self,request,pk):
-        form = CustomerProfileForm(request.POST)
-        if form.is_valid():
-            add = Customer.objects.get(pk=pk)
-            add.name = form.cleaned_data['name']
-            add.locality = form.cleaned_data['locality']
-            add.city = form.cleaned_data['city']
-            add.mobile = form.cleaned_data['mobile']
-            add.state = form.cleaned_data['state']
-            add.zipcode = form.cleaned_data['zipcode']
-            add.save()
-            messages.success(request, "¡Felicidades! Perfil actualizado satisfactoriamente")
-        else:
-            messages.warning(request, "Datos inválidos")
-        return redirect('address')
+    context = {
+        'form':form,
+    }
+    return render(request, 'app/address.html', context)
 
 def add_to_cart(request):
     user=request.user
@@ -219,8 +195,9 @@ def create_order(request):
                 delivery_option=request.POST.get('delivery_option'),
                 total_price=totalamount,
             )
+          
         
-
+        OrderItem.objects.create(order=order, product=p.product, quantity=p.quantity)
         order.products.set(selected_products)
         cart_items.delete()
 

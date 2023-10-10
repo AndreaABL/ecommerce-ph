@@ -59,15 +59,16 @@ class MySetPasswordForm(SetPasswordForm):
 
 
 class CustomerProfileForm(forms.ModelForm):
+    first_name = forms.CharField(label='Nombre', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    last_name = forms.CharField(label='Apellido', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    state = forms.ChoiceField(label='Región', choices=STATE_CHOICES, widget=forms.Select(attrs={ 'class':'form-control'}))
+    locality = forms.CharField(label='Ciudad', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    city = forms.CharField(label='Comuna', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    mobile = forms.CharField(label='Contacto', widget=forms.NumberInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    password2 = forms.CharField(label='Confirme su contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
     class Meta:
-        model = Customer
-        fields = ['name', 'locality', 'city', 'mobile', 'state', 'zipcode']
-        widgets = {
-            'name':forms.TextInput(attrs={'class':'form-control'}),
-            'locality':forms.TextInput(attrs={'class':'form-control'}),
-            'city':forms.TextInput(attrs={'class':'form-control'}),
-            'mobile':forms.NumberInput(attrs={'class':'form-control'}),
-            'state':forms.Select(attrs={'class':'form-control'}),
-            'zipcode':forms.TextInput(attrs={'class':'form-control'}),
-        }
+        model = CustomUser
+        fields = ['first_name', 'last_name', 'state', 'locality', 'city', 'mobile']
+        
 
