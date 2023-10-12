@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 # Register your models here.
 
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'state','locality','city','mobile','is_active', 'is_staff')
+    list_display = ('email', 'first_name',  'state','locality','city','mobile','is_active', 'is_staff')
 
 admin.site.register(CustomUser, CustomUserAdmin)
 @admin.register(Product)

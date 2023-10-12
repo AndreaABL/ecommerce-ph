@@ -6,7 +6,8 @@
 <div class="container">
     <div class="row my-3">
         <div class="col-sm-6 offset-sm-3">
-            <h3 style="font-family:Signika Negative">Registro</h3>
+            <br>
+            <h3 style="text-align:center" >Registro</h3>
             <br>
             <form action="" method="post" novalidate class="shadow p-5">
                 {% csrf_token %}
@@ -16,7 +17,7 @@
                 <input type="submit" value="Registrar" class="btn btn-success nt-5" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px"><br>
 
                 <div class="text-center text-primary fw-bold" style="font-family:Chakra Petch">
-                    <small style="color:black">¿Ya tienes cuenta? <a href="{% url 'login' %}" class="text-success">Iniciar Sesión</a></small>
+                    <small style="color:black; font-size:15px">¿Ya tienes cuenta? <a href="{% url 'login' %}" class="text-success">Iniciar Sesión</a></small>
                 </div>
 
                 {% if form.non_field_errors %}
@@ -26,11 +27,11 @@
                 {% endif %}
 
                 {% if messages %}
-                {% for msg in messages  %}
-                    <div class="alert alert-{{msg.tags}}" role="alert">
-                        {{msg}}
-                    </div>
-                {% endfor %}
+                    {% for msg in messages  %}
+                        <div class="alert alert-{{msg.tags}}" role="alert">
+                            {{msg}}
+                        </div>
+                    {% endfor %}
                 {% endif %}
             </form>
         </div>

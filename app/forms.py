@@ -1,9 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm, SetPasswordForm, PasswordResetForm
 from django.contrib.auth.models import User
-from . models import Customer, Order, CustomUser
+from . models import Customer, Order, CustomUser, Information
 
 STATE_CHOICES = (
+    ('', 'Selecciona una opción'),
     ('Región de Arica y Parinacota', 'Región de Arica y Parinacota'),
     ('Región de Tarapacá','Región de Tarapacá'),
     ('Región de Antofagasta','Región de Antofagasta'),
@@ -25,8 +26,7 @@ STATE_CHOICES = (
 
 class CustomerRegistrationForm(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
-    first_name = forms.CharField(label='Nombre', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
-    last_name = forms.CharField(label='Apellido', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    first_name = forms.CharField(label='Cliente', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
     state = forms.ChoiceField(label='Región', choices=STATE_CHOICES, widget=forms.Select(attrs={'autofocus':'True', 'class':'form-control'}))
     locality = forms.CharField(label='Ciudad', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
     city = forms.CharField(label='Comuna', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
@@ -36,7 +36,7 @@ class CustomerRegistrationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ['email','first_name','last_name','state','locality','city', 'mobile','password1','password2']
+        fields = ['email','first_name','state','locality','city', 'mobile','password1','password2']
 
 
 class LoginForm(AuthenticationForm):
@@ -59,16 +59,24 @@ class MySetPasswordForm(SetPasswordForm):
 
 
 class CustomerProfileForm(forms.ModelForm):
-    first_name = forms.CharField(label='Nombre', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
-    last_name = forms.CharField(label='Apellido', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    first_name = forms.CharField(label='Cliente', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
     state = forms.ChoiceField(label='Región', choices=STATE_CHOICES, widget=forms.Select(attrs={ 'class':'form-control'}))
     locality = forms.CharField(label='Ciudad', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
     city = forms.CharField(label='Comuna', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
     mobile = forms.CharField(label='Contacto', widget=forms.NumberInput(attrs={'autofocus':'True', 'class':'form-control'}))
-    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    password2 = forms.CharField(label='Confirme su contraseña', widget=forms.PasswordInput(attrs={'class':'form-control'}))
+
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'state', 'locality', 'city', 'mobile']
+        fields = ['first_name', 'state', 'locality', 'city', 'mobile']
         
 
+class InformationForm(forms.ModelForm):
+    name = forms.CharField(label='Nombre', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    description = forms.CharField(label='Producto', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    quantity = forms.CharField(label='Cantidad', widget=forms.NumberInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    class Meta:
+        model = Information
+        fields = ['name', 'description', 'quantity']
+
+class ProductSearchForm(forms.Form):
+    search = forms.CharField(label='Buscar productos', max_length=255, required=False, widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))

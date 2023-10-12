@@ -4,13 +4,7 @@
 
 {% block main-content %}
 <div class="container">
-    {% if messages %}
-        {% for msg in messages %}
-            <div class="alert alert-danger" role="alert">
-                {{msg}}
-            </div>
-        {% endfor %}
-    {% endif %}
+
 <div class="row mt-4">
     <div class="col-sm-6">
         <h4>Detalles del pedido</h4>
@@ -23,19 +17,21 @@
                 <h5 id="title">{{item.product.name}}</h5>
                 <p id="quantity">Cantidad: {{item.quantity}}</p>
                 {% load humanize %}
-                <p class="fw-bold" id="unit_price">Precio: ${{item.product.selling_price|intcomma}}</p>
+                <p class="fw-bold" id="unit_price">Precio: ${{item.product.selling_price|intcomma}} c/u</p>
             </div>
         </div>
         {% endfor %}
-        <div class="row container">
-            <small style="font-size:17px; color:red"><strong>IMPORTANTE: </strong> </small>
-            <small style="font-size:15px; text-align:justify">El despacho de productos tiene un valor de $1472 x KM el que se agregará al monto total una vez calculada la distancia existente entre nuestra ubicación y la de usted</small>
-        </div>
+        
     </div>
+    
     <div class="col-sm-5 offset-sm-1" >
-
+        <br><br>
+        <div class="row-container">
+            <small style="font-size:17px; color:red"><strong>IMPORTANTE: </strong> </small>
+            <small style="font-size:15px; text-align:justify">El despacho de productos tiene un valor de $1.472 x KM el que se agregará al monto total una vez calculada la distancia existente entre nuestra ubicación y la de usted</small>
+        
             {% csrf_token %}
-            <br><br><br>
+            <br><br>
             <select class="form-select" name="delivery_option" id="delivery_option" aria-label=".form-select-lg example">
                 <option selected>Elija la opción que más le acomode</option>
                 <option value="retiro">Retiro en tienda</option>
@@ -43,12 +39,13 @@
 
             </select>
 
-            <br><br>
+            <br>
             <div id="location_field" style="display: none;">
 
                 <input type="text" class="form-control" name="address" id="address" placeholder="Ingrese su ubicación exacta">
             </div>
-            <br><br>
+            <br>
+            
 
             <form action="/list_orders" class="d-inline">
                 <button type="submit" class="btn btn-success shadow py-2" style="font-size:14px; font-weight:550; padding:10px 20px; border-radius:4px">Generar orden</button>

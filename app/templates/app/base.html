@@ -16,10 +16,11 @@
     <link href="https://cdn.jsdelivr.net/npm/swiper@9.4.1/modules/scrollbar/scrollbar.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="{% static 'app/images/HOJA.png' %}" />
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Signika+Negative&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}" />
     <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}" />
@@ -73,7 +74,7 @@
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-              > <span class="text-capitalize"><i class="fa-solid fa-user"></i>   {{user.first_name}}</span></a>
+              > <span class="text-capitalize"><i class="fa-regular fa-user"></i>   {{user.first_name}}</span></a>
               <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                 <li><a class="dropdown-item " href="{% url 'profile' %}">Perfil</a></li>
                 <li><a class="dropdown-item " href="{% url 'list_orders' %}">Cotizaciones</a></li>
@@ -83,7 +84,7 @@
 
             </li>
             <li class="nav-item mx-2">
-              <a href="{% url 'showcart' %}" class="nav-link text-dark link-success"><span class="badge bg-danger">{% if totalitem > 0 %} {{totalitem}} {% endif %}</span><i class="fa-solid fa-cart-shopping"></i></a>
+              <a href="{% url 'showcart' %}" class="nav-link text-dark link-success"><span class="badge bg-danger">{% if totalitem > 0 %} {{totalitem}} {% endif %}</span><i class="fa-regular fa-cart-shopping"></i></a>
             </li>
 
             {% else %}
@@ -160,9 +161,8 @@
         <!-- Grid container -->
 
         <!-- Copyright -->
-        <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2); font-family:Gabarito">
           <small class="ml-2">&copy; Proyectos Hidráulicos, 2023. Todos los derechos reservados.</small>
-
         </div>
         <!-- Copyright -->
       </footer>

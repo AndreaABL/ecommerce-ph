@@ -5,7 +5,7 @@
 {% block main-content %}
 <div class="container my-5">
     <div class="row">
-        <h3 style="font-family:Signika Negative; text-align: center">Bienvenido/a <span class="text-capitalize">{{custom_user.first_name}}</span> <i class="fa-sharp fa-regular fa-face-smile" style="color: #19671e;"></i></h3>
+        <h3 style=" text-align: center">Bienvenido/a <span class="text-capitalize">{{custom_user.first_name}}</span> <i class="fa-regular fa-face-smile-beam"></i></h3>
     </div>
     <br>
     <div class="col-sm-2 border-end">
@@ -18,8 +18,7 @@
         <table class="table table-striped table-bordered table-hover">
             <thead class="table-light">
                 <tr class="align-middle text-center">
-                    <th>Nombre</th>
-                    <th>Apellido</thss=>
+                    <th>Cliente</th>
                     <th>Región</thclass=>
                     <th>Ciudad</thclass=>
                     <th>Comuna</thlass=>
@@ -30,7 +29,6 @@
             <tbody class="table-group-divider" >
                     <tr class="align-middle text-center">
                         <td >{{ custom_user.first_name }}</td>
-                        <td>{{ custom_user.last_name }}</td>
                         <td>{{ custom_user.state }}</tdss=>
                         <td>{{ custom_user.locality}}</td=>
                         <td>{{ custom_user.city }}</td=>

@@ -52,8 +52,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    first_name = models.CharField(max_length=100)
     state = models.CharField(verbose_name='Región', choices=STATE_CHOICES, max_length=100, null=True)
     locality = models.CharField(verbose_name='Comuna', max_length=200)
     city = models.CharField(verbose_name='Ciudad' ,max_length=50)
@@ -65,7 +64,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name']
 
     def __str__(self):
         return self.email
@@ -91,7 +90,6 @@ class Product(models.Model):
 
     def __str__(self) :
         return self.name
-
 class Customer(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(verbose_name='Nombre',max_length=200)
@@ -138,3 +136,8 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"
+    
+class Information(models.Model):
+    name = models.CharField(max_length=100, default=True)
+    description = models.CharField(max_length=255)
+    quantity = models.PositiveIntegerField(default=1)

@@ -1,12 +1,11 @@
 
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.http import JsonResponse
-from . models import Product, Customer, Cart, Category, Order, CustomUser, OrderItem
-from django.db.models import Count
-from . forms import CustomerRegistrationForm, CustomerProfileForm, Customer, LoginForm
+from . models import Product,  Cart, Category, Order, OrderItem
+from . forms import CustomerRegistrationForm, CustomerProfileForm, ProductSearchForm
 from django.contrib import messages
 from django.db.models import Q
 
@@ -167,9 +166,23 @@ def remove_cart(request):
 
 
 def search(request):
-    query = request.GET['search']
-    product = Product.objects.filter(Q(name__icontains=query))
-    return render(request, 'app/search.html', locals())
+    if request.method == 'GET':
+        form = ProductSearchForm(request.GET)
+        if form.is_valid():
+            search_term = form.cleaned_data.get('search')
+            products = Product.objects.filter(name__icontains=search_term)
+        else:
+            products = Product.objects.all()
+    else: 
+        form = ProductSearchForm()
+        products = Product.objects.all()
+    context = {
+        'products' : products,
+        'form' : form,
+    }
+
+    return render(request, 'app/search.html', context)
+
 
 @login_required
 def create_order(request):
@@ -218,9 +231,6 @@ def list_orders(request):
     # Retrieve orders for the current user
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'app/list_orders.html', {'orders': orders})
-
-
-
 
 
 

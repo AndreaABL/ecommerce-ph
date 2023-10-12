@@ -5,14 +5,14 @@
 <div class="container my-5">
 
             <div class="row row-cols-3 row-cols-md-6 g-4"  style="justify-content:center">
-                {% for prod in product  %}
+                {% for product in products  %}
                 <div class="col-sm-4 text-center" id="producto" style="margin:20px">
-                    <a href="{% url 'product-detail' prod.id %}" class="btn">
+                    <a href="{% url 'product-detail' product.id %}" class="btn">
                         <div>
-                            <img src="{{prod.product_image.url}}"  width="100%" height="100%"/>
-                            <div class="fw-bold" style="font-size:13px">{{prod.name}}</div>
+                            <img src="{{product.product_image.url}}"  width="100%" height="100%"/>
+                            <div class="fw-bold" style="font-size:13px">{{product.name}}</div>
                             <div class="fw-bold" style="color:green;">
-                                ${{prod.selling_price}}
+                                ${{product.selling_price}}
                             </div>
                         </div>
                     </a>

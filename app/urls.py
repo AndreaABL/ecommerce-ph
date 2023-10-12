@@ -13,9 +13,7 @@ urlpatterns = [
     path('about/', views.about, name = "about"),
     path('contact/', views.contact,name="contact"),
 
-
     path('categories/<int:category_id>/', views.category_detail, name='category_detail'),
-
 
 
     path('product-detail/<int:pk>', views.ProductDetail.as_view(), name="product-detail"),
