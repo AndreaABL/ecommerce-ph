@@ -4,9 +4,49 @@
     font-family: 'Gabarito', sans-serif;
 }
 
+#ad-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 998;
+}
+
+#ad-container img {
+    max-width: 90%;
+    max-height: 90%;
+    animation: fadeIn 1s;
+}
 
 
 
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.move-button {
+    position: absolute; /* Position the button absolutely */
+    top: 65%; /* Adjust this value to set the vertical position */
+    left: 42%; /* Adjust this value to set the horizontal position */
+    transform: translate(-50%, -50%); /* Center the button */
+    padding: 10px 20px;
+    background-color: #235428;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Hover effect for the button */
+.move-button:hover {
+    background-color: #1B401F;
+}
 /*Whatsapp*/
 .float{
 	position:fixed;

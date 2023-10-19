@@ -84,7 +84,7 @@
 
             </li>
             <li class="nav-item mx-2">
-              <a href="{% url 'showcart' %}" class="nav-link text-dark link-success"><span class="badge bg-danger">{% if totalitem > 0 %} {{totalitem}} {% endif %}</span><i class="fa-regular fa-cart-shopping"></i></a>
+              <a href="{% url 'showcart' %}" class="nav-link text-dark link-success"><span class="badge bg-danger">{% if totalitem > 0 %} {{totalitem}} {% endif %}</span><i class="fa-regular fa-clipboard"></i></a>
             </li>
 
             {% else %}
@@ -110,7 +110,7 @@
         </button>
 
     </nav>
-
+    {% block ad %}{% endblock ad %}
     {% block banner-slider %}{% endblock banner-slider %}
     {% block information %}{% endblock information %}
     {% block main-content %}{% endblock main-content %}

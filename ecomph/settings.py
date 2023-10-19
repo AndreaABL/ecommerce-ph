@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-^kvadg3tguk5umglz7r+x3n=7^ts+fo41h5w+gv@m7602qo%1-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -92,6 +92,7 @@ DATABASES = {
 }
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -142,15 +143,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'practicaproyectoshidraulicos@gmail.com'
-EMAIL_HOST_PASSWORD = 'vmagqkpyojkcttxr'
+EMAIL_HOST = 'mail.proyectoshidraulicos.cl'
+EMAIL_USE_SSL = True
+EMAIL_PORT= 465
+EMAIL_HOST_USER = 'administracion@proyectoshidraulicos.cl'
+EMAIL_HOST_PASSWORD = 'Andrea2023'
+
 
 
 ADMINS = [
-    ('andreaa', 'practicaproyectoshidraulicos@gmail.com'),
+    ('admin', 'administracion@proyectoshidraulicos.cl'),
 ]
 
 AUTH_USER_MODEL = 'app.customuser'

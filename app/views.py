@@ -20,6 +20,10 @@ def contact(request):
 def orders(request):
     return render(request, "app/orders.html")
 
+def products_without_category(request):
+    productss = Product.objects.filter(category=None)
+    return render(request, 'app/products_without_category.html', {'productss': productss})
+
 
 def category_list(request):
     categories = Category.objects.filter(parent_category = None)
@@ -217,6 +221,7 @@ def create_order(request):
                 order = order, 
                 product = cart_item.product, 
                 quantity = cart_item.quantity,
+                user = request.user,
             )
         order.products.set(selected_products)
         cart_items.delete()

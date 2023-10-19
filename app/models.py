@@ -79,7 +79,7 @@ class Category(models.Model):
         return self.name
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     selling_price = models.IntegerField()
     description = models.TextField()
     composition = models.TextField(default='')

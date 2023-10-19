@@ -1,3 +1,23 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const adContainer = document.getElementById("ad-container");
+
+    // Display the ad with an effect
+    function showAd() {
+        adContainer.style.display = "flex";
+    }
+
+    // Close the ad when clicking anywhere on the screen
+    function closeAd() {
+        adContainer.style.display = "none";
+    }
+
+    // Listen for clicks on the ad container
+    adContainer.addEventListener("click", closeAd);
+
+    // Show the ad after a delay (e.g., 5 seconds)
+    setTimeout(showAd, 400);
+});
+
 
 $('.plus-cart').click(function(){
     var id = $(this).attr("pid").toString();
@@ -61,5 +81,4 @@ document.getElementById('delivery_option').addEventListener('change', function()
         locationField.style.display = 'none';
     }
 });
-
 
