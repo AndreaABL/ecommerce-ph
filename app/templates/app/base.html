@@ -12,6 +12,7 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
+    
     <script src="https://cdn.jsdelivr.net/npm/swiper@9.4.1/swiper-bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/swiper@9.4.1/modules/scrollbar/scrollbar.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +29,9 @@
     <title>Proyectos Hidráulicos | {% block title %}{% endblock title %}</title>
   </head>
   <body>
+    
+
+
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow" style="font-family:Chakra Petch; display:flex; justify-content:space-between; padding: 10px 25px;" >
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">
@@ -50,6 +54,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link text-dark link-success" href="{% url 'contact' %}">Contacto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-red link-success" href="{% url 'irrigat' %}">Irrigat</a>
             </li>
           </ul>
           <form class="d-flex" role="search" action="/search">
@@ -185,7 +192,7 @@
       integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
       crossorigin="anonymous"
     ></script>
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHjf0owq4j0WJGu6hnkq4UhUFUjMwlhRA&libraries=places&callback=initMap" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -196,8 +203,6 @@
     <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'app/js/all.min.js' %}"></script>
     <script src="{% static 'app/js/myscript.js' %}"></script>
-
-
 
   </body>
 </html>

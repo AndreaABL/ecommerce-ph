@@ -33,6 +33,7 @@ class ProductModelAdmin(admin.ModelAdmin):
 class CategoryModelAdmin(admin.ModelAdmin):
     list_display = ['name', 'parent_category']
 
+
 @admin.register(Customer)
 class CustomerModelAdmin(admin.ModelAdmin):
     list_display = ['id','name','locality','city','state','zipcode']

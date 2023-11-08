@@ -1,37 +1,20 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block title %}Productos{% endblock title %}
+{% load humanize %}
+{% block title %}Irrigat{% endblock title %}
 
 {% block main-content %}
-
-<div class="container my-5" >
-
-    <div class="row row-cols-3 row-cols-md-6 g-4"  style="justify-content:center">
-        {% for irrigats in irrigat  %}
-            <div class="col-text-center" id="producto" style="margin:20px">
-                <a href="{% url 'product-detail' irrigats.id %}" class="btn">
-                <div >
-                    <img src="{{irrigats.product_image.url}}"  width="100%" height="100%"/>
-                    <br>
-                    <div class="fw-bold" style="font-size:13px">{{irrigats.name}}</div>
-                    {% load humanize %}
-                    <div class="fw-bold" style="color:green;">
-                        ${{irrigats.selling_price|intcomma}}
-                    </div>
-                    
-                </div>
-                </a>
-            </div>
-        {% endfor %}
-            </div>
+<div class="container my-5">
+    <div class="row">
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/uDcmDd5RTWM?si=co9uammmJeQbrpt7" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 </div>
 
 
+<div id="banner" class="section-m1" style="padding: 5px 0px;display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
+    <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
+</div>
 
-
-    <div id="banner" class="section-m1" style="margin: 20px 0; display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
-        <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
-    </div>
 {% endblock main-content %}

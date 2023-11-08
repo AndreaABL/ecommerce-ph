@@ -12,9 +12,10 @@ urlpatterns = [
     path('' , views.category_list, name='home'),
     path('about/', views.about, name = "about"),
     path('contact/', views.contact,name="contact"),
+    path('irrigat/', views.irrigat,name="irrigat"),
     path('products/without-category/', views.products_without_category, name='products_without_category'),
-
     path('categories/<int:category_id>/', views.category_detail, name='category_detail'),
+
 
 
     path('product-detail/<int:pk>', views.ProductDetail.as_view(), name="product-detail"),

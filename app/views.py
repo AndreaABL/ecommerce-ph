@@ -1,13 +1,13 @@
 
 from django.shortcuts import render, redirect
-
+from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.http import JsonResponse
 from . models import Product,  Cart, Category, Order, OrderItem
-from . forms import CustomerRegistrationForm, CustomerProfileForm, ProductSearchForm
-from django.contrib import messages
+from . forms import CustomerRegistrationForm, CustomerProfileForm, ProductSearchForm, InformationForm
 from django.db.models import Q
+from django.contrib import messages
 
 # Create your views here.
 
@@ -15,7 +15,29 @@ def about(request):
     return render(request, "app/about.html")
 
 def contact(request):
-    return render(request, "app/contact.html")
+    if request.method == 'POST':
+        form = InformationForm(request.POST)
+        if form.is_valid():
+            # Process the form data and send an email
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            description = form.cleaned_data['description']
+
+            # Send an email to the administrator
+            subject = 'Nuevo mensaje'
+            message = f'Nombre: {name}\nEmail: {email}\nDescripción: {description}'
+            from_email = email
+            recipient_list = ['administracion@proyectoshidraulicos.cl']
+            send_mail(subject, message, from_email, recipient_list)
+            
+
+            # You can also save the form data to a database here
+    else:
+        form = InformationForm()
+    return render(request, "app/contact.html", {'form':form})
+
+def irrigat(request):
+    return render(request, "app/irrigat.html")
 
 def orders(request):
     return render(request, "app/orders.html")
@@ -24,9 +46,12 @@ def products_without_category(request):
     productss = Product.objects.filter(category=None)
     return render(request, 'app/products_without_category.html', {'productss': productss})
 
-
 def category_list(request):
     categories = Category.objects.filter(parent_category = None)
+    return render(request, 'app/home.html', {'categories': categories})
+
+def menu_view(request):
+    categories = Category.objects.filter(parent_category__isnull=True)  # Get top-level categories
     return render(request, 'app/home.html', {'categories': categories})
 
 def category_detail(request, category_id):
@@ -46,7 +71,6 @@ class ProductDetail(View):
         item_product =Product.objects.filter(item=1)
 
         return render(request, "app/productdetail.html", locals())
-
 
 class CustomerRegistrationView(View):
     def get(self,request):

@@ -2,22 +2,20 @@
 {% load static %}
 {% block title %}Inicio{% endblock title %}
 
+{% block banner-slider %}
+
 {% block ad %}
 
 <div id="ad-container">
     <img src="{% static "app/images/carrete.jpg" %}" alt="Advertisement">
-    <a href="your_file_url_here" download>
-        <button class="move-button">Ficha técnica</button>
-    </a>
+    <div class="ad-buttons">
+      <a href="{% static "app/archivos/Solucion Irrigat diseno.xlsx" %}" class="ad-button">Planilla de diseño</a>
+      <a href="https://proyectoshidraulicos.cl/categories/19/" class="ad-button">Ver carretes</a>
+  </div>
 </div>
-
-
-  
-
 
 {% endblock ad %}
 
-{% block banner-slider %}
 
 <div class="hero" style="background-image: url('{% static 'app/images/hero.jpg'%}');">
     <h4 style="font-size:25px font-family:Gabarito" >¡Hola!</h4>
@@ -25,8 +23,6 @@
     <p style="font-size:20px; font-family:Gabarito">Directamente desde el siguiente botón</p>
     <a class="button-53" role="button" href="#categoria">VER PRODUCTOS</a>
 </div>
-<br><br>
-
 {% endblock banner-slider %}
 
 {% block information %}
@@ -34,7 +30,7 @@
     <div class="row bg text-center p-5 text-dark border-bottom shadow" id="categoria" >
         <h1 ><i class="fa-sharp fa-solid fa-seedling" style="color:green"></i> Bienvenido <i class="fa-sharp fa-solid fa-seedling" style="color:green"></i></h1>
   
-        <small class="fs-5" style="font-family:Gabarito">En Proyectos Hidráulicos podrás realizar la cotización de los productos que necesites y una vez finalizado el proceso, te contactaremos a la brevedad para brindarte más información.
+        <small class="fs-5" style="font-family:Gabarito">En Proyectos Hidráulicos podrás solicitar la cotización de los productos que necesites y una vez finalizado el proceso, te contactaremos a la brevedad para brindarte más información.
         </small>
     </div>
 </div>
@@ -50,14 +46,13 @@
                 <img src="{{category.category_image.url}}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title" style="font-family:Gabarito">{{category.name}}</h5>
-                  
                   <a href="{% url 'category_detail' category_id=category.id %}" class="btn btn-success">IR</a>
                 </div>
             </div>
             {% endfor %}
           </div>
           <br><br>
-          <div class="row w-100 align-items-center">
+          <div class="justify-content-center">
             <div class="col text-center">
               <button type="button" class="btn btn-success btn-lg align-items-center" ><a href="{% url 'products_without_category' %}" style="text-decoration:none; color:white">
                 ver más
@@ -65,13 +60,12 @@
             </div>	
           </div>
           
-        
-          
         </div>
         
             
       <div id="banner" class="section-m1" style="padding: 5px 0px;display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
         <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
-      </div>
+            
+    </div>
 
 {% endblock main-content %}

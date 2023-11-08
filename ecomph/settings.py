@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'app',
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -134,6 +136,7 @@ LOGIN_REDIRECT_URL = '/'
 REGISTER_REDIRECT_URL = '/login'
 STATICFILES_DIR = [ os.path.join(BASE_DIR, 'static'),
                     'app/css/style.css']
+
 
 
 # Default primary key field type

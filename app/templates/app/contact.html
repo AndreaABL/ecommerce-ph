@@ -7,34 +7,100 @@
   <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
 </div>
 <br>
-  <div class="container" id="contact-details">
-    <div class="details">
-      <h2 style="font-size:46px; line-height:54px">Visítanos</h2>
-      <h3>Estamos ubicados en</h3>
-      <div>
-        <li>
-            <i class="fa-solid fa-map-pin"></i>
-            <p>Sector San Pablo S/N Romeral, Curicó</p>
-        </li>
-        <li>
-            <i class="fa-regular fa-envelope"></i>
-            <p>ventas@proyectoshidraulicos.cl</p>
-        </li>
-        <li>
-            <i class="fa-solid fa-phone"></i>
-            <p>+56922358252</p>
-        </li>
-        <li>
-            <i class="fa-regular fa-clock"></i>
-            <p>Lunes a Viernes: 08:30hrs a 18:00hrs</p>
-        </li>
+<section class="ftco-section" >
+  
+  <div class="container justify-content-center align-items-center details">
+
+  
+  
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="wrapper">
+          <div class="row no-gutters mb-5">
+            <div class="col-md-7">
+              <div class="contact-wrap w-100 p-md-5 p-4">
+                <h3 class="mb-4">¿Necesitas cotizar otro producto?</h3>
+                <h4 class = "mb-4"> ¡Escríbenos!</h4>
+                <div id="form-message-warning" class="mb-4"></div> 
+                <form method="POST" id="contactForm" name="contactForm" class="contactForm">
+                  <br>
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <button type="submit"  id="sendButton" class="btn btn-success">Enviar mensaje</button>
+                      <div id="notification" style="display: none; font-size:20px">¡Mensaje enviado!
+                    </div>
+                    </div>
+                    
+                    </div>
+                  
+                </form>
+                
+              </div>
+              
+            </div>
+            <div class="col-lg-4 my-3 d-flex">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2700.00353126245!2d-71.09185497437761!3d-34.98551173415718!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2scl!4v1676493799187!5m2!1ses-419!2scl"
+                class="w-100" height="400" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="dbox w-100 text-center">
+                <div class="icon d-flex align-items-center justify-content-center">
+                  <button onclick="showAddress()" class="circle btn btn-danger"><i class="fa-solid fa-location-dot"></i></button>
+                </div>
+                <div id="address-info" class="information-container text-center align-items-center justify-content-center" style="background-color:#F2C4C8">
+                  <p style="text-align:center; align-items:center; justify-content:center; transition: opacity 2s ease;">Sector San Pablo S/N Romeral, Curicó</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="dbox w-100 text-center">
+                <div class="icon d-flex align-items-center justify-content-center" >
+                  <button onclick="showContact()" class="circle btn btn-warning"><i class="fa-solid fa-phone" style="color:white"></i></button>
+                </div>
+                <div id="contact-info" class="information-container text-center align-items-center justify-content-center" style="background-color:#FFE69A">
+                  <p style="text-align:center; align-items:center; justify-content:center; transition: opacity 2s ease;">+569 2235 8252</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="dbox w-100 text-center">
+                <div class="icon d-flex align-items-center justify-content-center" >
+                  <button onclick="showEmail()" class="circle btn btn-primary"><i class="fa-solid fa-envelope"></i></button>
+                </div>
+                <div id="email-info" class="information-container text-center align-items-center justify-content-center" style="background-color:#ACCEFF">
+                  <p style="text-align:center; align-items:center; justify-content:center; transition: opacity 2s ease;">ventas@proyectoshidraulicos.cl</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="dbox w-100 text-center">
+                <div class="icon d-flex align-items-center justify-content-center" >
+                  <button onclick="showTime()" class="circle btn btn-success"><i class="fa-regular fa-clock"></i></button>
+                </div>
+                <div id="time-info" class="information-container text-center align-items-center justify-content-center" style="background-color:#B1D8C6">
+                  <p style="text-align:center; align-items:center; justify-content:center; transition: opacity 2s ease;">Lunes a Viernes: 08:30hrs a 18:00hrs</p>
+                </div>
+              </div>
+            </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <br><br>
-    <div class="map" style:"padding-top:30px">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2700.00353126245!2d-71.09185497437761!3d-34.98551173415718!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2scl!4v1676493799187!5m2!1ses-419!2scl" width="600" height="450" style="border:0; display:flex;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
   </div>
-  <br><br><br>
+</section>
+
+    
+  
+</div>
+<br>
+ 
 
 {% endblock main-content %}

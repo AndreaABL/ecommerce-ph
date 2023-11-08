@@ -72,11 +72,11 @@ class CustomerProfileForm(forms.ModelForm):
 
 class InformationForm(forms.ModelForm):
     name = forms.CharField(label='Nombre', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
-    description = forms.CharField(label='Producto', widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))
-    quantity = forms.CharField(label='Cantidad', widget=forms.NumberInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    email = UsernameField(label="Email", widget=forms.EmailInput(attrs={'autofocus':'True', 'class':'form-control'}))
+    description = forms.CharField(label='Producto', widget=forms.Textarea(attrs={'autofocus':'True', 'class':'form-control' , 'cols':30 ,'rows':4}))
     class Meta:
         model = Information
-        fields = ['name', 'description', 'quantity']
+        fields = ['name' ,'email', 'description']
 
 class ProductSearchForm(forms.Form):
     search = forms.CharField(label='Buscar productos', max_length=255, required=False, widget=forms.TextInput(attrs={'autofocus':'True', 'class':'form-control'}))

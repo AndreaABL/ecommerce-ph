@@ -5,7 +5,7 @@
 {% block main-content %}
 <div class="container my-5">
     <div class="row">
-        <h3 style="font-family:Signika Negative; text-align: center">Bienvenido/a <span class="text-capitalize">{{user.first_name}}</span> <i class="fa-sharp fa-regular fa-face-smile" style="color: #19671e;"></i></h3>
+        <h3 style="text-align: center">Bienvenido/a <span class="text-capitalize">{{user.first_name}}</span> <i class="fa-regular fa-face-smile-beam" ></i></h3>
     </div>
     <div class="col-sm-2 border-end">
         <ul class="list-unstyled">
@@ -24,8 +24,8 @@
         </div>
     </div>
 </div>
-<div id="banner" class="section-m1" style="margin: 20px 0; display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
-        <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
+<div id="banner" class="section-m1" style="padding: 5px 0px;display:flex; flex-direction:column; justify-content:center;align-items:center; width:100%; background-size:cover; background-position:cover;">
+    <img src="{% static 'app/images/banner/banner.png.jpg' %}" style="width:100%">
+            
 </div>
-
 {% endblock main-content %}

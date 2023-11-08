@@ -50,7 +50,6 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=100)
     state = models.CharField(verbose_name='Región', choices=STATE_CHOICES, max_length=100, null=True)
@@ -73,6 +72,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     parent_category = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='subcategories')
     category_image = models.ImageField(upload_to='category')
+    category_info = models.CharField(max_length=255, null=True, blank=True)
     subcategory_image = models.ImageField(upload_to='subcategory')
 
     def __str__(self):
@@ -90,6 +90,7 @@ class Product(models.Model):
 
     def __str__(self) :
         return self.name
+
 class Customer(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(verbose_name='Nombre',max_length=200)
@@ -139,5 +140,6 @@ class OrderItem(models.Model):
     
 class Information(models.Model):
     name = models.CharField(max_length=100, default=True)
+    email = models.CharField(max_length=100, default=True)
     description = models.CharField(max_length=255)
-    quantity = models.PositiveIntegerField(default=1)
+
