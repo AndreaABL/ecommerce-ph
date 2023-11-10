@@ -18,6 +18,16 @@ document.addEventListener("DOMContentLoaded", function () {
   setTimeout(showAd, 400);
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+var disabledLinks = document.querySelectorAll('.disabled-link');
+
+disabledLinks.forEach(function(link) {
+    link.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default click behavior
+    });
+});
+});
+
 $('.plus-cart').click(function(){
   var id = $(this).attr("pid").toString();
   var eml = this.parentNode.children[2]

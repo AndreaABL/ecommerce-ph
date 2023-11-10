@@ -87,6 +87,7 @@ class Product(models.Model):
     product_image = models.ImageField(upload_to='product')
     stock = models.IntegerField(default=0)
     item = models.BooleanField(default=False, help_text='0=default, 1=item')
+    is_disabled = models.BooleanField(default=False)
 
     def __str__(self) :
         return self.name
